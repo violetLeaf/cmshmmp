@@ -1,0 +1,14 @@
+<h1>Create / Edit Elements</h1>
+
+<div class="generalinfo">
+    <p>Name: {{ currentStation.name }}</p>
+</div>
+
+<div class="media">
+    <p>Elements</p>
+    <p>+</p>
+    <p>Trash</p>
+    <div class="media" *ngFor="let media of sortedMedia">
+        <p>{{ media.name }}</p>
+    </div>
+</div>
