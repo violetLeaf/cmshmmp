@@ -7,19 +7,13 @@ import {Router} from '@angular/router';
   styleUrls: ['./station.component.scss']
 })
 export class StationComponent implements OnInit {
-  exampleMediaArray = [
-    {id: 1, type: "text", name: "Text XY"},
-    {id: 2, type: "picture", name: "picture XY"},
-    {id: 3, type: "video", name: "video XY"},
-  ];
-
-  currentStation: any;
+  currenttour: any;
 
   constructor(private router: Router) {
     let stateData = this.router.getCurrentNavigation().extras.state.data;
 
     if (stateData !== undefined) {
-      this.currentStation = stateData.station;
+      this.currenttour = stateData.tour;
     } else {
       this.router.navigate(['']);
     }
@@ -29,6 +23,6 @@ export class StationComponent implements OnInit {
   }
   
   public get sortedMedia(){
-    return this.exampleMediaArray.sort((a, b)=> {return a.id - b.id});
+    return this.currenttour.media.sort((a, b)=> {return a.id - b.id});
   }
 }

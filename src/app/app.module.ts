@@ -7,9 +7,9 @@ import { ToursComponent } from './tours/tours.component';
 import { StationsComponent } from './stations/stations.component';
 import { StationComponent } from './stations/station/station.component';
 import { TourComponent } from './tours/tour/tour.component';
+import { NotfoundpageComponent } from './notfoundpage/notfoundpage.component';
 import { TemplatesComponent } from './templates/templates.component';
 import { TemplateComponent } from './templates/template/template.component';
-import { NotfoundpageComponent } from './notfoundpage/notfoundpage.component';
 
 @NgModule({
   declarations: [
@@ -18,9 +18,9 @@ import { NotfoundpageComponent } from './notfoundpage/notfoundpage.component';
     StationsComponent,
     StationComponent,
     TourComponent,
+    NotfoundpageComponent,
     TemplatesComponent,
-    TemplateComponent,
-    NotfoundpageComponent
+    TemplateComponent
   ],
   imports: [
     BrowserModule,

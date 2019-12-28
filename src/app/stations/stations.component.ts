@@ -25,6 +25,7 @@ export class StationsComponent implements OnInit {
 
   onStationClick(station: any) {
     this.router.navigate(['stations/station'], {state: {data: {station}}});
+    console.log("happened");
   }
 
   public get sortedStations(){

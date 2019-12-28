@@ -7,5 +7,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'cmsproj';
+  title = 'Hirschmann CMS';
+
+  goback(){
+    console.log("back");
+
+    
+  }
 }

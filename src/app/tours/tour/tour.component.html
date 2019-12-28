@@ -7,7 +7,7 @@
 </div>
 
 <div class="stations">
-    <div class="station" *ngFor="let t of examplestationarray">
+    <div class="station" *ngFor="let t of currentTour.stations" (click)="onStationClick(t)">
         <p>{{ t.name }}</p>
     </div>
     <p>+</p>

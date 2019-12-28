@@ -3,7 +3,7 @@
 <div class="stations">
     <p>Stations</p> <p>+</p>
 
-    <div class="stationitem" *ngFor="let t of sortedStations;" (click)="onStationClick(t)">
-        <p>{{ t.name }}</p>
+    <div class="stationitem" *ngFor="let t of sortedStations">
+        <p (click)="onStationClick(t)">{{ t.name }}</p>
     </div>
 </div>

@@ -2,11 +2,11 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { StationsComponent } from './stations/stations.component';
 import { StationComponent } from './stations/station/station.component';
-import { TemplatesComponent } from './templates/templates.component';
-import { TemplateComponent } from './templates/template/template.component';
 import { ToursComponent } from './tours/tours.component';
 import { TourComponent } from './tours/tour/tour.component';
 import { NotfoundpageComponent } from './notfoundpage/notfoundpage.component';
+import { TemplatesComponent } from './templates/templates.component';
+import { TemplateComponent } from './templates/template/template.component';
 
 
 const routes: Routes = [
