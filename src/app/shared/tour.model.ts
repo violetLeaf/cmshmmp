@@ -16,10 +16,13 @@
 //     stations: Station[];
 //   }
 
-//   export default interface TourModel {
-//     name: string;
-//     date: string;
-//     areas: Area[];
-//     completePath: string;
-//   }
+  export default interface TourModel {
+    id: number;
+    title: string;
+    descriptioin: string;
+    reversible: boolean;
+    template_id: number;
+    guide: string;
+    date: Date;
+  }
 

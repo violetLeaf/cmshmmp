@@ -1,7 +1,7 @@
 <div>
     <div class="touritem" *ngFor="let tour of sortedTours;" (click)="onTourClick(tour)">
         <p class="date">{{tour.date | date:'dd.LL.yyyy / HH:mm' }} </p>
-        <p class="name">{{ tour.name }} </p>
+        <p class="name">{{ tour.title }} </p>
         <p class="guide">{{ tour.guide }}</p>
     </div>
 </div>

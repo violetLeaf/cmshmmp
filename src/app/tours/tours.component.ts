@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+import TourModel from '../shared/tour.model';
 
 @Component({
   selector: 'app-tours',
@@ -48,7 +50,16 @@ export class ToursComponent implements OnInit {
         {id: 3, type: "video", name: "video 8"}]}]},
   ];
 
-  constructor(private router: Router) { }
+  toursarray: TourModel[] = [];
+
+  constructor(private router: Router, private http: HttpClient) {
+    // this.toursarray = this.http.get("http://localhost:3000/tours");
+
+    this.http.get<TourModel[]>("http://localhost:3000/tours").subscribe(function(res) {
+       this.toursarray=res;
+       console.log(this.toursarray);
+    }.bind(this));
+  }
 
   ngOnInit() {
     
@@ -59,6 +70,6 @@ export class ToursComponent implements OnInit {
   }
 
   public get sortedTours(){
-    return this.tourarray.sort((a, b)=> {return a.id - b.id});
+    return this.toursarray.sort((a, b)=> {return a.id - b.id});
   }
 }
