@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
+import StationModel from '../shared/station.model';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-stations',
@@ -17,18 +19,28 @@ export class StationsComponent implements OnInit {
     {id: 6, name: "Information Table"}
   ];
 
-  constructor(private router: Router) { }
+  stationsarray: StationModel[] = [];
+
+  constructor(private router: Router, private http: HttpClient) {
+     this.http.get<StationModel[]>("http://localhost:3000/stations").subscribe(function(res) {
+      this.stationsarray=res;
+   }.bind(this));
+  }
 
   ngOnInit() {
     
   }
 
   onStationClick(station: any) {
-    this.router.navigate(['stations/station'], {state: {data: {station}}});
-    console.log("happened");
+    // this.router.navigate(['stations/station'], {state: {data: {station}}});
+    this.http.post<StationModel>("http://localhost:3000/poststation", this.stationsarray[0]).subscribe(
+      function(res){
+        console.log(res);
+      }
+    )
   }
 
   public get sortedStations(){
-    return this.examplestationarray.sort((a, b)=> {return a.id - b.id});
+    return this.stationsarray.sort((a, b)=> {return a.id - b.id});
   }
 }

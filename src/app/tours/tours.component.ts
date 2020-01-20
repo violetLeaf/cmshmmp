@@ -57,8 +57,10 @@ export class ToursComponent implements OnInit {
 
     this.http.get<TourModel[]>("http://localhost:3000/tours").subscribe(function(res) {
        this.toursarray=res;
-       console.log(this.toursarray);
+      //  console.log(this.toursarray);
     }.bind(this));
+
+    
   }
 
   ngOnInit() {
@@ -72,4 +74,10 @@ export class ToursComponent implements OnInit {
   public get sortedTours(){
     return this.toursarray.sort((a, b)=> {return a.id - b.id});
   }
+
+  // this.http.post<TourModel>("http://localhost:3000/posttour", this.toursarray[0]).subscribe(
+  //     function(res){
+  //       console.log(res);
+  //     }
+    // )
 }
