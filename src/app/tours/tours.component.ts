@@ -59,8 +59,6 @@ export class ToursComponent implements OnInit {
        this.toursarray=res;
       //  console.log(this.toursarray);
     }.bind(this));
-
-    
   }
 
   ngOnInit() {

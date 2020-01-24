@@ -23,7 +23,7 @@ export class StationsComponent implements OnInit {
 
   constructor(private router: Router, private http: HttpClient) {
      this.http.get<StationModel[]>("http://localhost:3000/stations").subscribe(function(res) {
-      this.stationsarray=res;
+      this.stationsarray = res;
    }.bind(this));
   }
 

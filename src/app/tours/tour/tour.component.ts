@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+import TourModel from 'src/app/shared/tour.model';
 
 @Component({
   selector: 'app-tour',
@@ -8,9 +10,10 @@ import {Router} from '@angular/router';
 })
 export class TourComponent implements OnInit {
   currentTour: any;
+  zwtableinfos: any;
   temps: any;
 
-  constructor(private router: Router) { 
+  constructor(private router: Router, private http: HttpClient) { 
     let stateData = this.router.getCurrentNavigation().extras.state.data;
 
     if (stateData !== undefined) {
@@ -18,17 +21,31 @@ export class TourComponent implements OnInit {
     } else {
       this.router.navigate(['']);
     }
+
+    // noch testen
+    this.http.post("http://localhost:3000/posttour",
+      [this.currentTour, this.zwtableinfos])
+      .subscribe(function(res) {
+       this.toursarray=res;
+      //  console.log(this.toursarray);
+    }.bind(this));
   }
 
   ngOnInit() {
   }
 
-  onStationClick(tour: any) {
-    this.router.navigate(['stations/station'], {state: {data: {tour}}});
-    console.log(tour);
+  public get sortedStations(){
+    // return this.currentTour.stations.sort((a, b)=> {return a.id - b.id});
+    return null;
   }
 
-  public get sortedStations(){
-    return this.currentTour.sort((a, b)=> {return a.id - b.id});
+  save(){
+    if (this.currentTour == null){
+      // Create here
+    }
+    else if (this.currentTour != null){
+      // Update here
+
+    }
   }
 }

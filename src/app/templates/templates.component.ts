@@ -21,4 +21,12 @@ export class TemplatesComponent implements OnInit {
   ngOnInit() {
   }
 
+  onTemplateClick(template: any) {
+    this.router.navigate(['templates/template'], {state: {data: {template}}});
+  }
+
+  public get sortedTemplates(){
+    return this.templatesarray.sort((a, b)=> {return a.id - b.id});
+  }
+
 }

@@ -1,1 +1,12 @@
-<p>template works!</p>
+<h1>Create / Edit Template</h1>
+
+<div class="generalinfo">
+    <p>Name: <input type="text" value="{{ currentTemplate.title }}"></p>
+</div>
+
+<div class="stations">
+    <div class="station" *ngFor="let t of currentTemplate.stations" (click)="onStationClick(t)">
+        <p>{{ t.name }}</p>
+    </div>
+    <p>+</p>
+</div>

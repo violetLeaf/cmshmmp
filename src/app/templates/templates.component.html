@@ -1,6 +1,6 @@
 <div>
-    <div *ngFor="let template of templatesarray;">
+    <div *ngFor="let template of sortedTemplates;" (click)="onTemplateClick(template)">
         <p class="name">{{ template.title }} </p>
     </div>
-    <p>+</p>
+    <p (click)="onTemplateClick(null)">+</p>
 </div>
