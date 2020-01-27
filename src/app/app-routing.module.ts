@@ -7,6 +7,7 @@ import { TourComponent } from './tours/tour/tour.component';
 import { NotfoundpageComponent } from './notfoundpage/notfoundpage.component';
 import { TemplatesComponent } from './templates/templates.component';
 import { TemplateComponent } from './templates/template/template.component';
+import { MediaselectComponent } from './shared components/mediaselect/mediaselect.component';
 
 
 const routes: Routes = [
@@ -16,6 +17,7 @@ const routes: Routes = [
   {path: 'stations/station', component: StationComponent},
   {path: 'templates', component: TemplatesComponent},
   {path: 'templates/template', component: TemplateComponent},
+  {path: 'mediaselect', component: MediaselectComponent},
   {path: '**', component: NotfoundpageComponent}
 ];
 

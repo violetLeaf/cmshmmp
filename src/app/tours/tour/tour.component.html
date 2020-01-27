@@ -1,14 +1,18 @@
 <h1>Create / Edit Tour</h1>
+
 <p (click)="save()">[save symbol here]</p>
+<p (click)="delete()">[delete symbol here]</p>
+
 <div class="generalinfo">
-    <p>Name: <input type="text" value="{{ currentTour.title }}"></p>
-    <p>Date and Time: <input type="datetime" value="{{ currentTour.date | date:'dd.LL.yyyy / HH:mm' }}"></p>
-    <p>Guide: <input type="text" value="{{ currentTour.guide }}"></p>
+    <p>Name: <input id="title" type="text" value="{{ currentTour.title }}"></p>
+    <p>Date and Time: <input id="date" type="datetime-local" value="{{ dateformated() }}"></p>
+    <p>Guide: <input id="guide" type="text" value="{{ currentTour.guide }}"></p>
+    <p>Reversible: <input type="checkbox" id="reversible"></p>
 </div>
 
 <div class="stations">
-    <div class="station" *ngFor="let t of sortedStations" (click)="onStationClick(t)">
-        <p>{{ t.name }}</p>
+    <div class="station" *ngFor="let s of sortedStations" (click)="onStationClick(s)">
+        <p>{{ s.name }}</p>
     </div>
     <p>+</p>
 </div>

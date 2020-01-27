@@ -32,12 +32,7 @@ export class StationsComponent implements OnInit {
   }
 
   onStationClick(station: any) {
-    // this.router.navigate(['stations/station'], {state: {data: {station}}});
-    this.http.post<StationModel>("http://localhost:3000/poststation", this.stationsarray[0]).subscribe(
-      function(res){
-        console.log(res);
-      }
-    )
+    this.router.navigate(['stations/station'], {state: {data: {station}}});
   }
 
   public get sortedStations(){

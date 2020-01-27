@@ -2,8 +2,8 @@
     id: number;
     title: string;
     reversible: boolean;
-    template_id: number;
-    guide: string;
+    template_id?: number;
+    guide?: string;
     date: Date;
   }
 
