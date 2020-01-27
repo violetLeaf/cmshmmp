@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import TourModel from 'src/app/shared/tour.model';
 import { DatePipe } from '@angular/common';
 import StationModel from 'src/app/shared/station.model';
+import { TourservicesService } from '../service/tourservices.service';
 
 @Component({
   selector: 'app-tour',
@@ -16,7 +17,7 @@ export class TourComponent implements OnInit {
   zwtableinfos: any;
   temps: any;
 
-  constructor(private router: Router, private http: HttpClient) { 
+  constructor(private router: Router, private http: HttpClient, private tourService: TourservicesService) { 
     let stateData = this.router.getCurrentNavigation().extras.state.data;
 
     if (stateData !== undefined) {
@@ -25,12 +26,13 @@ export class TourComponent implements OnInit {
       this.router.navigate(['']);
     }
 
-    var response = this.http.get<StationModel[]>("http://localhost:3000/stationsfortour/" + this.currentTour.id).subscribe(function(res) {
+  // this.currentStations = tourService.getallStations(this.currentTour.id);
+    this.http.get<StationModel[]>("http://localhost:3000/stationsfortour/" + this.currentTour.id).subscribe(function(res) {
       this.currentStations = res;
-      console.log(this.currentStations);
+      console.log(this.currentStations); // this returns what i need
    }.bind(this));
     
-   console.log(this.currentStations);
+   console.log(this.currentStations); // this returns undefined
   }
 
   ngOnInit() {
