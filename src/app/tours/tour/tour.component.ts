@@ -4,7 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import TourModel from 'src/app/shared/tour.model';
 import { DatePipe } from '@angular/common';
 import StationModel from 'src/app/shared/station.model';
-import { TourservicesService } from '../service/tourservices.service';
+import { TourservicesService } from '../../shared/services/tourservices.service';
 
 @Component({
   selector: 'app-tour',
@@ -26,21 +26,15 @@ export class TourComponent implements OnInit {
       this.router.navigate(['']);
     }
 
-  // this.currentStations = tourService.getallStations(this.currentTour.id);
-    this.http.get<StationModel[]>("http://localhost:3000/stationsfortour/" + this.currentTour.id).subscribe(function(res) {
-      this.currentStations = res;
-      console.log(this.currentStations); // this returns what i need
-   }.bind(this));
-    
-   console.log(this.currentStations); // this returns undefined
-  }
+  this.currentStations = tourService.getallStationsforTour(this.currentTour.id);
+}
 
   ngOnInit() {
   }
 
   public get sortedStations(){
-    // return this.currentStations.sort((a, b)=> {return a.ordernumber - b.ordernumber});
-    return null;
+    return this.currentStations.sort((a, b)=> {return a.ordernumber - b.ordernumber});
+    // return null;
   }
 
   dateformated(){
@@ -102,6 +96,7 @@ export class TourComponent implements OnInit {
     }
   }
 
+  // create service for delete
   delete(){
     console.log(this.currentTour.id);
     if (!isNaN(this.currentTour.id)){

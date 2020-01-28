@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import TourModel from '../shared/tour.model';
+import { TourservicesService } from '../shared/services/tourservices.service';
 
 @Component({
   selector: 'app-tours',
@@ -17,11 +18,12 @@ export class ToursComponent implements OnInit {
     date: null
   };
 
-  constructor(private router: Router, private http: HttpClient) {
-    this.http.get<TourModel[]>("http://localhost:3000/tours").subscribe(function(res) {
-       this.toursarray=res;
-      //  console.log(this.toursarray);
-    }.bind(this));
+  constructor(private router: Router, private http: HttpClient, private tourService: TourservicesService) {
+    // this.http.get<TourModel[]>("http://localhost:3000/tours").subscribe(function(res) {
+    //    this.toursarray=res;
+    //   //  console.log(this.toursarray);
+    // }.bind(this));
+    this.toursarray = tourService.getallTours();
   }
 
   ngOnInit() {
