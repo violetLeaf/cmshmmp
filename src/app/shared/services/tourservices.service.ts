@@ -104,27 +104,6 @@ export class TourservicesService {
   //  }.bind(this));
   //  console.log(medias);
 
-    medias = [{ 
-      id: 1,
-      caption: "Media A",
-      language_id: 1,
-      station_id: 1,
-      text: "Dies ist ein Text A"
-    },{ 
-      id: 2,
-      caption: "Media B",
-      language_id: 1,
-      station_id: 1,
-      text: "Dies ist ein Text B"
-    },{ 
-      id: 3,
-      caption: "Media C",
-      language_id: 1,
-      station_id: 1,
-      text: "Dies ist ein Text C"
-    },
-  ];
-
     return medias;
   }
 }
