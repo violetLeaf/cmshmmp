@@ -23,14 +23,12 @@ export class MediaselectComponent implements OnInit {
       this.router.navigate(['']);
     }
 
-  //   this.http.get<MediaModel[]>("http://localhost:3000/mediasforstationsfortour/" + this.currentStation.id).subscribe(function(res) {
-  //     this.currentMedias = res;
-  //     console.log(res);
-  //     console.log(this.currentMedias);
-  //  }.bind(this));
-  //  console.log(this.currentMedias);
+    this.http.get<MediaModel[]>("http://localhost:3000/mediasforstationsfortour/" + 
+        this.currentStation.id).subscribe((res) => {
+        this.currentMedias = res;
+    });
 
-    this.currentMedias = tourservice.getallMediasforTour(1);
+    // this.currentMedias = tourservice.getallMediasforTour(this.currentStation.id);
     console.log(this.currentMedias);
   }
 

@@ -22,43 +22,6 @@ export class TourservicesService {
     //   //  console.log(this.toursarray);
     // }.bind(this));
 
-    tours = [{ 
-      id: 1,
-      title: "Tour A",
-      reversible: false,
-      guide: "Max Mustermann",
-      date: new Date(2020, 1, 30, 11, 11)
-    },
-    { 
-      id: 2,
-      title: "Tour B",
-      reversible: true,
-      guide: "Max 2",
-      date: new Date(2020, 2, 25, 1, 11)
-    },
-    { 
-      id: 3,
-      title: "Tour C",
-      reversible: false,
-      guide: "Max 3",
-      date: new Date(2020, 1, 31, 20, 11)
-    },
-    { 
-      id: 4,
-      title: "Tour D",
-      reversible: true,
-      guide: "Max 4",
-      date: new Date(2020, 2, 20, 9, 11)
-    },
-    { 
-      id: 5,
-      title: "Tour E",
-      reversible: false,
-      guide: "Max 5",
-      date: new Date(2020, 3, 30, 11, 11)
-    },
-  ];
-
     return tours;
   }
 
@@ -72,37 +35,16 @@ export class TourservicesService {
       
     // console.log(station); // this returns undefined
 
-    stations = [{ 
-      id: 1,
-      name: "Station A",
-      area_id: 1,
-      ordernumber: 1,
-    },
-    { 
-      id: 2,
-      name: "Station B",
-      area_id: 1,
-      ordernumber: 1,
-    },
-    { 
-      id: 3,
-      name: "Station C",
-      area_id: 1,
-      ordernumber: 1,
-    },
-  ];
-
     return stations;
   }
 
   public getallMediasforTour(id:number): MediaModel[]{
     let medias:MediaModel[] = null;
 
-  //   this.http.get<MediaModel[]>("http://localhost:3000/mediasforstationsfortour/" + id).subscribe(function(res) {
-  //     this.currentMedias = res;
-  //     console.log(res);
-  //  }.bind(this));
-  //  console.log(medias);
+    this.http.get<MediaModel[]>("http://localhost:3000/mediasforstationsfortour/" + id).subscribe(
+      (res) => {
+        medias = res;
+    });
 
     return medias;
   }

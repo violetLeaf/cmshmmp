@@ -26,7 +26,19 @@ export class TourComponent implements OnInit {
       this.router.navigate(['']);
     }
 
-  this.currentStations = tourService.getallStationsforTour(this.currentTour.id);
+    // this.http.get<StationModel[]>("http://localhost:3000/stationsfortour/" + this.currentTour.id).subscribe(function(res) {
+    //   this.currentStations = res;
+    //   console.log(this.currentStations); // this returns what i need
+    // }.bind(this));
+      
+    // console.log(this.currentStations); // this returns undefined
+
+    this.http.get<StationModel[]>("http://localhost:3000/stationsfortour/" + 
+        this.currentTour.id).subscribe((res) => {
+        this.currentStations = res;
+    });
+
+  // this.currentStations = tourService.getallStationsforTour(this.currentTour.id);
 }
 
   ngOnInit() {

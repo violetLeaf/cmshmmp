@@ -19,11 +19,12 @@ export class ToursComponent implements OnInit {
   };
 
   constructor(private router: Router, private http: HttpClient, private tourService: TourservicesService) {
-    // this.http.get<TourModel[]>("http://localhost:3000/tours").subscribe(function(res) {
-    //    this.toursarray=res;
-    //   //  console.log(this.toursarray);
-    // }.bind(this));
-    this.toursarray = tourService.getallTours();
+    this.http.get<TourModel[]>("http://localhost:3000/tours").subscribe(function(res) {
+       this.toursarray=res;
+      //  console.log(this.toursarray);
+    }.bind(this));
+
+    // this.toursarray = tourService.getallTours();
   }
 
   ngOnInit() {
