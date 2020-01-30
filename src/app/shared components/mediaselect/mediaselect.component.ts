@@ -29,14 +29,29 @@ export class MediaselectComponent implements OnInit {
     });
 
     // this.currentMedias = tourservice.getallMediasforTour(this.currentStation.id);
-    console.log(this.currentMedias);
   }
 
   ngOnInit() {
   }
 
   public get sortedMedia(){
-    return this.currentMedias.sort((a, b)=> {return a.id - b.id});
-    // return null;
+    if (this.currentMedias != null)
+      return this.currentMedias.sort((a, b)=> {return a.id - b.id});
+    else
+      return null;
+    // return this.currentMedias;
+  }
+
+  onmediaclick(id, m){
+    var med:HTMLElement = (<HTMLElement>document.getElementById(id));
+    if (med.className == "active"){
+      med.className = "inactive";
+    }
+    else if (med.className == "inactive"){
+      med.className = "active";
+    }
+    console.log(med);
+    console.log(m);
   }
 }
+

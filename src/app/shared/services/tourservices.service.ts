@@ -28,12 +28,11 @@ export class TourservicesService {
   public getallStationsforTour(id:number): StationModel[]{
     let stations:StationModel[] = null;
 
-    // this.http.get<StationModel[]>("http://localhost:3000/stationsfortour/" + id).subscribe(function(res) {
-    //   this.currentStations = res;
-    //   console.log(station); // this returns what i need
-    // }.bind(this));
+    // this.http.get<StationModel[]>("http://localhost:3000/stationsfortour/" + 
+    // //     this.currentTour.id).subscribe((res) => {
+    // //     this.currentStations = res;
+    // // });
       
-    // console.log(station); // this returns undefined
 
     return stations;
   }
