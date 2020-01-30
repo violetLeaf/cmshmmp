@@ -5,4 +5,10 @@
         <p class="active" id="{{ m.id }}"> {{ m.caption }} {{ m.text }}</p>
     </div>
     <p>+</p>
+    <jw-modal id="ov_stations">
+        <div id="allmedia">
+            <p *ngFor="let med of allmedia" id="{{ med.id }}" class="inactive" (click)="onmediaclick(med.id)">{{ med.caption }} {{ med.text }}</p>
+        </div>
+        <p (click)="closemodal()">[ Close ]</p>
+    </jw-modal>
 </div>

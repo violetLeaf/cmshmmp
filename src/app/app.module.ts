@@ -2,7 +2,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 
+import { ModalModule } from './_modal';
 import { AppRoutingModule } from './app-routing.module';
+
 import { AppComponent } from './app.component';
 import { ToursComponent } from './tours/tours.component';
 import { StationsComponent } from './stations/stations.component';
@@ -28,7 +30,8 @@ import { MediaselectComponent } from './shared components/mediaselect/mediaselec
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    ModalModule
   ],
   providers: [],
   bootstrap: [AppComponent]

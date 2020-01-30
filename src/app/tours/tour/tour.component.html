@@ -11,8 +11,14 @@
 </div>
 
 <div class="stations">
-    <div class="station" *ngFor="let s of sortedStations" (click)="onStationClick(s)">
-        <p>{{ s.name }}</p>
+    <div id="selstations" class="station">
+        <p  *ngFor="let s of sortedStations" (click)="onStationClick(s)" id="{{ s.id }}">{{ s.name }}</p>
     </div>
-    <p>+</p>
+    <p (click)="addStationtoTour()">+</p>
+    <jw-modal id="ov_stations">
+        <div id="allstationsdiv">
+            <p *ngFor="let st of allStations" id="{{ st.id }}" class="notselected" (click)="onstationclick(st.id)">{{ st.name }}</p>
+        </div>
+        <p (click)="closemodal()">[ Close ]</p>
+    </jw-modal>
 </div>

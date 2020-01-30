@@ -5,6 +5,7 @@ import TourModel from 'src/app/shared/tour.model';
 import { DatePipe } from '@angular/common';
 import StationModel from 'src/app/shared/station.model';
 import { TourservicesService } from '../../shared/services/tourservices.service';
+import { ModalService } from '../../_modal';
 
 @Component({
   selector: 'app-tour',
@@ -14,10 +15,11 @@ import { TourservicesService } from '../../shared/services/tourservices.service'
 export class TourComponent implements OnInit {
   currentTour: TourModel;
   currentStations: StationModel[];
+  allStations: StationModel[] = null;
   zwtableinfos: any;
   temps: any;
 
-  constructor(private router: Router, private http: HttpClient, private tourService: TourservicesService) { 
+  constructor(private router: Router, private http: HttpClient, private tourService: TourservicesService, private modalService: ModalService) { 
     let stateData = this.router.getCurrentNavigation().extras.state.data;
 
     if (stateData !== undefined) {
@@ -29,6 +31,10 @@ export class TourComponent implements OnInit {
     this.http.get<StationModel[]>("http://localhost:3000/stationsfortour/" + 
         this.currentTour.id).subscribe((res) => {
         this.currentStations = res;
+    });
+
+    this.http.get<StationModel[]>("http://localhost:3000/stations").subscribe((res) => {
+      this.allStations = res;
     });
 
   // this.currentStations = tourService.getallStationsforTour(this.currentTour.id);
@@ -55,6 +61,45 @@ export class TourComponent implements OnInit {
 
   onStationClick(station:any){
     this.router.navigate(['mediaselect'], {state: {data: {station}}});
+  }
+
+  addStationtoTour(){
+    this.modalService.open("ov_stations");
+
+    let selectedstations = <HTMLCollection>document.getElementById("selstations").children;
+    let stations = <HTMLCollection>document.getElementById("allstationsdiv").children;
+    for (var i = 0; i < stations.length; i++){
+      if (stations[i].id == selectedstations[i].id){
+        stations[i].className = "selected";
+      }
+      else{
+        stations[i].className = "notselected";
+      }
+    }
+  }
+
+  onstationclick(id){
+    var station:HTMLElement = (<HTMLElement>document.getElementById(id));
+    if (station.className == "selected"){
+      station.className = "notselected";
+    }
+    else if (station.className == "notselected"){
+      station.className = "selected";
+    }
+  }
+
+  closemodal(){
+    let stationsclose = <HTMLCollection>document.getElementById("allstationsdiv").children;
+
+    this.currentStations.splice(0, this.currentStations.length);
+
+    for (var i = 0; i < stationsclose.length; i++){
+      if ( stationsclose[i].className == "selected"){
+        this.currentStations.push(this.allStations[stationsclose[i].id]);
+      }
+    }
+
+    this.modalService.close("ov_stations");
   }
 
   save(){

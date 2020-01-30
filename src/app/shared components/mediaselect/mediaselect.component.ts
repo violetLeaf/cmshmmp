@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import StationModel from 'src/app/shared/station.model';
 import MediaModel from 'src/app/shared/media.model';
 import { TourservicesService } from 'src/app/shared/services/tourservices.service';
+import { ModalModule, ModalService } from 'src/app/_modal';
 
 @Component({
   selector: 'app-mediaselect',
@@ -13,6 +14,7 @@ import { TourservicesService } from 'src/app/shared/services/tourservices.servic
 export class MediaselectComponent implements OnInit {
   currentStation: StationModel;
   currentMedias: MediaModel[];
+  allavailableMedia: MediaModel[];
 
   constructor(private router: Router, private http: HttpClient, private tourservice: TourservicesService) { 
     let stateData = this.router.getCurrentNavigation().extras.state.data;
