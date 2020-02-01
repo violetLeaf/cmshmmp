@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 import StationModel from '../shared/station.model';
 import { HttpClient } from '@angular/common/http';
+import AreaModel from '../shared/area.model';
 
 @Component({
   selector: 'app-stations',
@@ -9,33 +10,42 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./stations.component.scss']
 })
 export class StationsComponent implements OnInit {
-  
-  examplestationarray = [
-    {id: 1, name: "Station XY"},
-    {id: 2, name: "Station YX"},
-    {id: 3, name: "Station ZZ"},
-    {id: 4, name: "Maschine A"},
-    {id: 5, name: "Maschine B"},
-    {id: 6, name: "Information Table"}
-  ];
-
+  areas: AreaModel[] = [];
   stationsarray: StationModel[] = [];
+  standardStation: StationModel = {
+    id: -1,
+    name: "Standard Station",
+    area_id: 1,
+    ordernumber: (Math.random() * 100000)
+  }
 
   constructor(private router: Router, private http: HttpClient) {
      this.http.get<StationModel[]>("http://localhost:3000/stations").subscribe(function(res) {
       this.stationsarray = res;
    }.bind(this));
+
+    this.http.get<AreaModel[]>("http://localhost:3000/areas").subscribe((res) => {
+      this.areas = res;
+    });
   }
 
-  ngOnInit() {
-    
-  }
+  ngOnInit() {  }
 
-  onStationClick(station: any) {
+  onStationClick(station: StationModel) {
+
     this.router.navigate(['stations/station'], {state: {data: {station}}});
   }
 
   public get sortedStations(){
-    return this.stationsarray.sort((a, b)=> {return a.id - b.id});
+    if (this.stationsarray != null)
+      return this.stationsarray.sort((a, b)=> {return a.id - b.id});
+    else
+      return null;
+  }
+  public get sortedArea(){
+    if (this.areas != null)
+      return this.areas.sort((a, b)=> {return a.position - b.position});
+    else
+      return null;
   }
 }

@@ -1,9 +1,13 @@
 <h1>Create / Edit Stations</h1>
 
 <div class="stations">
-    <p>Stations</p> <p>+</p>
+    <span>Stations</span>
+    <span>Area:</span>
+    <select id="area">
+        <option id="-1" selected>-- all --</option>
+        <option *ngFor="let a of sortedArea" id="a.id">{{ a.title }}</option>
+    </select>
 
-    <div class="stationitem" *ngFor="let t of sortedStations">
-        <p (click)="onStationClick(t)">{{ t.name }}</p>
-    </div>
+    <div class="stationitem" *ngFor="let t of sortedStations" (click)="onStationClick(t)">{{ t.id }} {{t.name }}</div>
+    <p (click)="onStationClick(standardStation)">+</p>
 </div>

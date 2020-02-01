@@ -1,14 +1,26 @@
 <h1>Create / Edit Elements</h1>
 
 <div class="generalinfo">
-    <p>Name: {{ currenttour.name }}</p>
+    <p><span>Name:</span> <input id="name" type="text" value="{{ currentstation.name }}"></p>
+    <select id="area">
+        <option id="-1">-- please select area --</option>
+        <option *ngFor="let a of sortedArea" id="{{ a.id }}">{{ a.title }}</option>
+    </select>
+    <p (click)="save()">[ Save ]</p>
+    <p (click)="delete()">[ Trash ]</p>
 </div>
 
 <div class="media">
-    <p>Elements</p>
-    <p>+</p>
-    <p>Trash</p>
-    <div class="media" *ngFor="let media of sortedMedia">
-        <p>{{ media.name }}</p>
+    <p>Medias:</p>
+    <div class="media">
+        <p *ngFor="let m of sortedMedia">{{ m.caption }} {{ m.text }}</p>
     </div>
+    <p (click)="openmodal()">+</p>
+    <jw-modal id="ov_media">
+        <div id="ov_div">
+            <p>Please enter Text here:</p>
+            <input type="text" id="mediainput">
+        </div>
+        <p (click)="closemodal()">[ Close & Save ]</p>
+    </jw-modal>
 </div>

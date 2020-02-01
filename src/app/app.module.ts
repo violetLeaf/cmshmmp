@@ -13,7 +13,7 @@ import { TourComponent } from './tours/tour/tour.component';
 import { NotfoundpageComponent } from './notfoundpage/notfoundpage.component';
 import { TemplatesComponent } from './templates/templates.component';
 import { TemplateComponent } from './templates/template/template.component';
-import { MediaselectComponent } from './shared components/mediaselect/mediaselect.component';
+import { MediaselectComponent } from './tours/tour/mediaselect/mediaselect.component';
 
 @NgModule({
   declarations: [

@@ -18,6 +18,7 @@ export class MediaselectComponent implements OnInit {
 
   constructor(private router: Router, private http: HttpClient, private tourservice: TourservicesService) { 
     let stateData = this.router.getCurrentNavigation().extras.state.data;
+    console.log(stateData);
 
     if (stateData !== undefined) {
       this.currentStation = stateData.station;

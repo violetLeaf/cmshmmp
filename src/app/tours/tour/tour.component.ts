@@ -78,16 +78,6 @@ export class TourComponent implements OnInit {
     }
   }
 
-  onstationclick(id){
-    var station:HTMLElement = (<HTMLElement>document.getElementById(id));
-    if (station.className == "selected"){
-      station.className = "notselected";
-    }
-    else if (station.className == "notselected"){
-      station.className = "selected";
-    }
-  }
-
   closemodal(){
     let stationsclose = <HTMLCollection>document.getElementById("allstationsdiv").children;
 
@@ -100,6 +90,16 @@ export class TourComponent implements OnInit {
     }
 
     this.modalService.close("ov_stations");
+  }
+
+  onstationclick(id){
+    var station:HTMLElement = (<HTMLElement>document.getElementById(id));
+    if (station.className == "selected"){
+      station.className = "notselected";
+    }
+    else if (station.className == "notselected"){
+      station.className = "selected";
+    }
   }
 
   save(){
@@ -123,9 +123,8 @@ export class TourComponent implements OnInit {
       // console.log((<HTMLInputElement>document.getElementById("reversible")).checked);
 
       if (this.currentTour.id == -1){
-        this.http.post("http://localhost:3000/posttour",
-          [this.currentTour, this.zwtableinfos])
-          .subscribe(function(res) {
+        this.http.post("http://localhost:3000/posttour", [this.currentTour, this.zwtableinfos])
+        .subscribe(function(res) {
            this.currentTour=res;
         }.bind(this));
 
