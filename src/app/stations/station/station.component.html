@@ -8,8 +8,8 @@
             <option *ngFor="let a of sortedArea" id="{{ a.id }}">{{ a.title }}</option>
         </select>
     </div>
-    <p (click)="save()">[ Save ]</p>
-    <p (click)="delete()">[ Trash ]</p>
+    <span (click)="save()"><img src="../../../assets/icons/save.png" alt="Save"></span>
+    <span (click)="delete()"><img src="../../../assets/icons/trash.png" alt="Delete"></span>
 </div>
 
 <div class="media">
@@ -23,6 +23,6 @@
             <p>Please enter Text here:</p>
             <input type="text" id="mediainput">
         </div>
-        <p (click)="closemodal()">[ Close & Save ]</p>
+        <span (click)="closemodal()"><img src="../../../assets/icons/x.png" alt="">[ Close & Save ]</span>
     </jw-modal>
 </div>

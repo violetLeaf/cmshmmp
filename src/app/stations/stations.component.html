@@ -14,6 +14,6 @@
             <p *ngFor="let t of sortedStations" (click)="onStationClick(t)" id="{{ t.id }}">{{ t.name }}</p>
         </div>
         
-        <p (click)="onStationClick(standardStation)">+</p>
+        <span (click)="onStationClick(standardStation)"><img src="../../../assets/icons/plus.png" alt="+"></span>
     </div>
 </div>

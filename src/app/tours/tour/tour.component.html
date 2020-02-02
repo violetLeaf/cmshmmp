@@ -15,8 +15,8 @@
                 <p><input id="guide" type="text" value="{{ currentTour.guide }}"></p>
                 <p><input type="checkbox" id="reversible"></p>
 
-                <p (click)="save()">[S]</p>
-                <p (click)="delete()">[D]</p>
+                <span (click)="save()"><img src="../../../assets/icons/save.png" alt="Save"></span>
+                <span (click)="delete()"><img src="../../../assets/icons/trash.png" alt="Delete"></span>
             </div>
             
             <div class="stations">
@@ -30,11 +30,11 @@
                         <div id="allstationsdiv">
                             <p *ngFor="let st of allStations" id="{{ st.id }}" class="notselected" (click)="onstationclick(st.id)">{{ st.name }}</p>
                         </div>
-                        <input type="button" (click)="closemodal()" value="[ Close ]">
+                        <span (click)="closemodal()"><img src="../../../../assets/icons/x.png" alt=""><input type="button" value="[ Close ]"></span>
                     </jw-modal>
 
                     <div class="stationplus">
-                        <p (click)="addStationtoTour()">+</p>
+                        <span (click)="addStationtoTour()"><img src="../../../assets/icons/plus.png" alt="+"></span>
                     </div>
                 </div>
             </div>
