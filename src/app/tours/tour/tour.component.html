@@ -1,18 +1,38 @@
-<h1>Create / Edit Tour</h1>
+<h1>CREATE / EDIT TOURS</h1>
+<h2>TEMPLATES</h2>
+<div class="createtourwrapper">
+    <div class="tourbox">
+        <div class="createtourcontentwrapper">
+            <div class="generalinfocaption">
+                <p>Name</p>
+                <p>Date and Time</p>
+                <p>Guide</p>
+                <p>Reversible</p>
+            </div>
+            <div class="generalinfo">
+                <p><input id="title" type="text" value="{{ currentTour.title }}"></p>
+                <p><input id="date" type="datetime-local" value="{{ dateformated() }}"></p>
+                <p><input id="guide" type="text" value="{{ currentTour.guide }}"></p>
+                <p><input type="checkbox" id="reversible"></p>
 
-<p (click)="save()">[save symbol here]</p>
-<p (click)="delete()">[delete symbol here]</p>
-
-<div class="generalinfo">
-    <p>Name: <input id="title" type="text" value="{{ currentTour.title }}"></p>
-    <p>Date and Time: <input id="date" type="datetime-local" value="{{ dateformated() }}"></p>
-    <p>Guide: <input id="guide" type="text" value="{{ currentTour.guide }}"></p>
-    <p>Reversible: <input type="checkbox" id="reversible"></p>
-</div>
-
-<div class="stations">
-    <div class="station" *ngFor="let s of sortedStations" (click)="onStationClick(s)">
-        <p>{{ s.name }}</p>
+                <p (click)="save()">S</p>
+                <p (click)="delete()">D</p>
+            </div>
+            
+            <div class="stations">
+                <p>Stations</p>
+                <div class="stationwrapper">
+                    <div class="station" *ngFor="let s of sortedStations" (click)="onStationClick(s)">
+                        <p>{{ s.name }}</p>
+                    </div>
+                    <div class="stationplus">
+                        <p>+</p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <p>+</p>
+    <div class="templates">
+		<app-templates></app-templates>
+	</div>	
 </div>

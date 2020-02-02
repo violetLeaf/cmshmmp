@@ -1,9 +1,11 @@
-<h1>Create / Edit Stations</h1>
+<div class="stationswrapper">
+    <h1>CREATE / EDIT STATIONS</h1>
+    <div class="stationsbox">
 
-<div class="stations">
-    <p>Stations</p> <p>+</p>
+        <p>Stations</p> <p>+</p>
 
-    <div class="stationitem" *ngFor="let t of sortedStations">
-        <p (click)="onStationClick(t)">{{ t.name }}</p>
+        <div class="stationitem" *ngFor="let t of sortedStations">
+            <p (click)="onStationClick(t)">{{ t.name }}</p>
+        </div>
     </div>
 </div>

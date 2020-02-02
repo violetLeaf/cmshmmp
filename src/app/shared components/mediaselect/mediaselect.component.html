@@ -1,8 +1,14 @@
-<h1>Medias</h1>
-
-<div class="medias">
-    <div class="media" *ngFor="let m of sortedMedia">
-        <p>{{ m.id }} {{ m.caption }} {{ m.text }}</p>
+<h1>SELECT ELEMENTS</h1>
+<div class="mediawrapper">
+    <div class="mediabox">
+        <p>Elements</p>
+        <div class="medias">
+            <div class="media" *ngFor="let m of sortedMedia">
+                <p>{{ m.id }} {{ m.caption }} {{ m.text }}</p>
+            </div>
+            <p>+</p>
+        </div>
     </div>
-    <p>+</p>
 </div>
+
+

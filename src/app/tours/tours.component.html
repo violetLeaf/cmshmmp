@@ -1,10 +1,25 @@
-<div>
-    <div class="touritem" *ngFor="let tour of sortedTours;" (click)="onTourClick(tour)">
-        <p class="date">{{tour.date | date:'dd.LL.yyyy / HH:mm' }} </p>
-        <p class="name">{{ tour.title }} </p>
-        <p class="guide">{{ tour.guide }}</p>
-    </div>
-    <p (click)="onTourClick(standardTour)">+</p>
-</div>
+<h1>CREATE / EDIT TOURS</h1>
+<h2>TEMPLATES</h2>
+<div class="wrapper">
+	<div class="toursbox">
+		<div class="tourscaption">
+			<p>Date</p>
+			<p>Name</p>
+			<p>Guide</p>
+		</div>
+		<div class="toursitem" *ngFor="let tour of sortedTours;" (click)="onTourClick(tour)">
+			<div class="datewrapper">
+				<p class="date">{{tour.date | date:'dd.LL.yyyy / HH:mm' }} </p>
+			</div>
+			<p class="name">{{ tour.title }} </p>
+			<p class="guide">{{ tour.guide }}</p>
+		</div>
+		<p (click)="onTourClick(standardTour)" class="newtourplus">+</p>
+	</div>
+	
+	
+	<div class="templates">
+		<app-templates></app-templates>
+	</div>	
 
-<app-templates></app-templates>
+</div>
