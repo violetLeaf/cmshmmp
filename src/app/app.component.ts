@@ -11,7 +11,6 @@ export class AppComponent {
 
   goback(){
     console.log("back");
-
     
   }
 }
