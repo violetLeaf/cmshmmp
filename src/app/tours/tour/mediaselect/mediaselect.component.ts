@@ -41,30 +41,25 @@ export class MediaselectComponent implements OnInit {
     });
 
     // this.currentMedias = tourservice.getallMediasforTour(this.currentStation.id);
-
-    if (document.getElementById("medias").children.length > 0){
-      var medias = document.getElementById("medias").children;
-      for (var i = 0; i < medias.length; i++){
-        if (this.allavailableMedia[i].active)
-          document.getElementById(i.toString()).className = "active";
-        else if (!this.allavailableMedia[i].active)
-          document.getElementById(i.toString()).className = "inactive";
-      }
-    }
   }
 
   ngOnInit() { }
 
   public get sortedMedia(){
     if (this.allavailableMedia != null){
+
+      // gibt immer nur false zurück
       this.allavailableMedia.forEach(e => {
         this.currentMedias.forEach(ee => {
-          if (e.id == ee.id)
+          if (e.id == ee.id){
             e.active = true;
+          }
           else
             e.active = false;
         });
       });
+
+      // console.log(this.allavailableMedia[3].active);
 
       return this.allavailableMedia.sort((a, b)=> {return a.id - b.id});
     }
