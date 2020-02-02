@@ -2,17 +2,19 @@
 
 <div class="generalinfo">
     <p><span>Name:</span> <input id="name" type="text" value="{{ currentstation.name }}"></p>
-    <select id="area">
-        <option id="-1">-- please select area --</option>
-        <option *ngFor="let a of sortedArea" id="{{ a.id }}">{{ a.title }}</option>
-    </select>
+    <div class="areabox">
+        <select id="area">
+            <option id="-1">-- please select area --</option>
+            <option *ngFor="let a of sortedArea" id="{{ a.id }}">{{ a.title }}</option>
+        </select>
+    </div>
     <p (click)="save()">[ Save ]</p>
     <p (click)="delete()">[ Trash ]</p>
 </div>
 
 <div class="media">
     <p>Medias:</p>
-    <div class="media">
+    <div class="media" id="mediaoutput">
         <p *ngFor="let m of sortedMedia">{{ m.caption }} {{ m.text }}</p>
     </div>
     <p (click)="openmodal()">+</p>

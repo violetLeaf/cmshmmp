@@ -1,6 +1,10 @@
-<div>
-    <div *ngFor="let template of sortedTemplates;" (click)="onTemplateClick(template)">
-        <p class="name">{{ template.title }} </p>
+<div class="templates">
+    <div class="templateswrapper">
+        <div *ngFor="let template of sortedTemplates;" (click)="onTemplateClick(template)">
+            <p class="name">{{ template.title }} </p>
+        </div>
+        <div class="templateplus">
+            <p (click)="onTemplateClick(null)" >+</p>
+        </div>
     </div>
-    <p (click)="onTemplateClick(null)">+</p>
 </div>

@@ -1,0 +1,32 @@
+$lightgray: #E5E5E5;
+$darkgray: #A3A3A3;
+$blackgray: #5B5B5B;
+$lightblue: rgb(0,0,0);
+$blue: rgb(0,85,151);
+
+.stationswrapper{
+    position: fixed;
+    top: 80px;
+    left: 200px;
+    width: 1210px;
+    background-color: white;
+    border-radius: 20px;
+	margin-bottom: 20px;
+	height: 620px;
+	margin-right: 20px;
+}
+.stationsbox{
+    position: fixed;
+}
+
+h1{
+    font-size: 1.2em;
+    position: fixed;
+    top: 28px;
+    color: $blackgray;
+    left: 200px;
+}
+
+.areabox{
+    margin: 20px;
+}

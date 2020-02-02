@@ -1,13 +1,19 @@
-<h1>Create / Edit Stations</h1>
+<div class="stationswrapper">
+    <h1>CREATE / EDIT STATIONS</h1>
 
-<div class="stations">
-    <span>Stations</span>
-    <span>Area:</span>
-    <select id="area">
-        <option id="-1" selected>-- all --</option>
-        <option *ngFor="let a of sortedArea" id="a.id">{{ a.title }}</option>
-    </select>
+    <div class="areabox">
+        <span>Area:</span>
+        <select id="area">
+            <option id="-1" selected>-- all --</option>
+            <option *ngFor="let a of sortedArea" id="a.id">{{ a.title }}</option>
+        </select>
+    </div>
 
-    <div class="stationitem" *ngFor="let t of sortedStations" (click)="onStationClick(t)">{{ t.id }} {{t.name }}</div>
-    <p (click)="onStationClick(standardStation)">+</p>
+    <div class="stationsbox">
+        <div class="stationitem" >
+            <p *ngFor="let t of sortedStations" (click)="onStationClick(t)" id="{{ t.id }}">{{ t.name }}</p>
+        </div>
+        
+        <p (click)="onStationClick(standardStation)">+</p>
+    </div>
 </div>

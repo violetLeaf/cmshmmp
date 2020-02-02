@@ -1,12 +1,29 @@
-<div>
-    <a routerLink="" routerLinkActive="active"><img src="assets/images/logo.jpg"></a>
 
-    <p (click)="goback()">back</p>
 
-    <a routerLink="" routerLinkActive="active">Tours</a>
-    <a routerLink="/stations" routerLinkActive="active">Stations</a>
-    <a routerLink="/mediaspace" routerLinkActive="active">Mediaspace</a>
-    <a routerLink="/languages" routerLinkActive="active">Languages</a>
-</div>
+<body>
+	<div class="navbar">
+		<div class="navbartext">
+			<div class="navbartoursbox">
+				<a routerLink="" routerLinkActive="active" class="tours">Tours</a><br/>	
+			</div>
+			<div class="navbarstationsbox">
+				<a routerLink="/stations" routerLinkActive="active">Stations</a><br/>
+			</div>
+			<div class="navbarmediaspacebox">
+				<a routerLink="/mediaspace" routerLinkActive="active">Mediaspace</a><br/>
+			</div>
+			<div class="navbarlanguagebox">
+				<a routerLink="/languages" routerLinkActive="active">Languages</a><br/>
+			</div>
+		</div>
+	</div>
+	
+	<router-outlet></router-outlet>
+</body>
 
-<router-outlet></router-outlet>
+<!-- <a routerLink="" routerLinkActive="active" class="tours">Tours</a><br/>	
+<a routerLink="/stations" routerLinkActive="active">Stations</a><br/>
+<a routerLink="/mediaspace" routerLinkActive="active">Mediaspace</a><br/>
+<a routerLink="/languages" routerLinkActive="active">Languages</a><br/>
+
+<router-outlet></router-outlet> -->

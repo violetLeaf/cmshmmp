@@ -5,3 +5,72 @@
 .notselected{
     color: red;
 }
+
+$lightgray: #E5E5E5;
+$darkgray: #A3A3A3;
+$blackgray: #5B5B5B;
+$lightblue: rgb(0,0,0);
+$blue: rgb(0,85,151);
+
+
+.createtourwrapper{
+    position: fixed;
+    top: 80px;
+    left: 200px;
+    width: 1000px;
+    background-color: white;
+    border-radius: 20px;
+	height: 620px;
+    margin-right: 20px;
+}
+* {
+    font-size: 0.95em;
+}
+.tourbox{
+    margin-top: 20px;
+    margin-left: 20px;
+}
+.generalinfo {
+    display: grid;
+    grid-template-columns: 30% 25% 25% 10% 5% 5%;;
+}
+.generalinfocaption {
+    font-weight: bold;
+    color: $darkgray;
+    display: grid;
+    grid-template-columns: 30% 25% 25% 10% 5% 5%;;
+}
+.stations > p{
+    font-weight: bold;
+    color: $darkgray;
+}
+.stationwrapper {
+    display: grid;
+    grid-template-columns: 25% 25% 25% 25%;
+    margin-right: 20px;
+}
+.station {
+    margin-right: 10px;
+}
+.stationwrapper p {
+    font-weight: bold;
+    border: 1px solid $darkgray;
+    border-radius: 15px;
+    padding: 10px;
+    text-align: center;
+}
+.stationplus p{
+    border: 1px solid $darkgray;
+}
+h1, h2{
+    font-size: 1.2em;
+    position: fixed;
+    top: 28px;
+    color: $blackgray;
+}
+h1{
+    left: 200px;
+}
+h2{
+    left: 1220px;
+}

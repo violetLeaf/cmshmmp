@@ -39,7 +39,7 @@ export class MediaselectComponent implements OnInit {
 
   public get sortedMedia(){
     if (this.currentMedias != null)
-      return this.currentMedias.sort((a, b)=> {return a.id - b.id});
+      return this.allavailableMedia.sort((a, b)=> {return a.id - b.id});
     else
       return null;
     // return this.currentMedias;

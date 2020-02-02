@@ -44,6 +44,8 @@ export class StationComponent implements OnInit {
   public get sortedMedia(){
     if (this.media != null)
       return this.media.sort((a, b)=> {return a.id - b.id});
+    else if (this.tosavemedias != null)
+      return this.tosavemedias.sort((a, b)=> {return a.name - b.name});
     else
       return null;
   }
@@ -71,6 +73,10 @@ export class StationComponent implements OnInit {
       }
       else if (this.currentstation.id == -1){
         this.tosavemedias.push(text);
+        (<HTMLElement>document.getElementById("mediaoutput")).innerHTML = "";
+        this.sortedMedia.forEach(e => {
+          (<HTMLElement>document.getElementById("mediaoutput")).innerHTML += "<p>" + e + "</p>";
+        });
       }
 
       this.modalService.close("ov_media");
@@ -95,7 +101,7 @@ export class StationComponent implements OnInit {
 
       if (this.currentstation.id == -1){
         console.log(this.currentstation.name + this.currentstation.area_id);
-        this.http.post("http://localhost:3000/poststation", [this.currentstation.name, this.currentstation.area_id])
+        this.http.post("http://localhost:3000/poststation", {"name": this.currentstation.name, "area_id": this.currentstation.area_id})
         .subscribe(function(res) {
           console.log(res);
           this.currentstation = res;
@@ -108,11 +114,9 @@ export class StationComponent implements OnInit {
           });
         }.bind(this));
 
-        
-
         alert("New Station created.");
 
-        // this.router.navigate(['']);
+        this.router.navigate(['/stations']);
       }
       else if (this.currentstation.id != -1){
         console.log("Tour überarbeiten");
@@ -121,23 +125,20 @@ export class StationComponent implements OnInit {
     catch(err){
       console.log("an error occured: " + err);
     }
-    this.http.post<StationModel>("http://localhost:3000/poststation", this.currentstation).subscribe(
-      function(res){
-        console.log(res);
-      }
-    )
   }
 
   delete(){
-    if (!isNaN(this.currentstation.id)){
+    if (!isNaN(this.currentstation.id) && this.currentstation.id != -1){
       const httpOpt = {
         headers: new HttpHeaders({ 'Content-Type': 'application/json' }), body: {"table" : "station", "id" : this.currentstation.id}
       };
       this.http.delete("http://localhost:3000/delete", httpOpt).subscribe(function(res){
         this.currentTour = res;
       }.bind(this));
-      this.router.navigate(['']);
+      this.router.navigate(['/stations']);
     }
+    else if (this.currentstation.id == -1)
+      this.router.navigate(['/stations']);
     else{
       console.log("An error occured when trying to delete.");
     }
