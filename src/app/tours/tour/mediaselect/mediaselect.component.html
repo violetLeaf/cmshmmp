@@ -3,10 +3,8 @@
 <div class="mediawrapper">
     <div class="mediabox">
         <p>Elements</p>
-            <div class="medias">
-            <div class="media" *ngFor="let m of sortedMedia" (click)="onmediaclick(m.id, m)">
-                <p class="active" id="{{ m.id }}"> {{ m.caption }} {{ m.text }}</p>
-            </div>
+        <div id="medias" class="medias">
+            <p  *ngFor="let m of sortedMedia" (click)="onmediaclick(m.id, m)" id="{{ m.id }}">{{ m.caption }} {{ m.text }}</p>
         </div>
     </div>
 </div>

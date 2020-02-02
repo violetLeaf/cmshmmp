@@ -23,7 +23,7 @@
                 <p>Stations</p>
                 <div class="stationwrapper">
                     <div id="selstations" class="station">
-                        <p *ngFor="let s of sortedStations" (click)="onStationClick(s)" id="{{ s.id }}">{{ s.name }}</p>
+                        <p *ngFor="let s of sortedStations" (click)="onStationClick(s , currentTour)" id="{{ s.id }}">{{ s.name }}</p>
                     </div>
 
                     <jw-modal id="ov_stations">

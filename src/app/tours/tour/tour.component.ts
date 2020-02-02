@@ -59,8 +59,8 @@ export class TourComponent implements OnInit {
     return v;
   }
 
-  onStationClick(station:any){
-    this.router.navigate(['mediaselect'], {state: {data: {station}}});
+  onStationClick(station:StationModel, tour:TourModel){
+    this.router.navigate(['mediaselect'], {state: {data: {station, tour}}});
   }
 
   addStationtoTour(){

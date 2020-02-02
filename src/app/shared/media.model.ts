@@ -8,5 +8,7 @@ export default interface MediaModel {
     
     text?: string;
     destinationurl?: string;
+
+    active?: boolean;
   }
 

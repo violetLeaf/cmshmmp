@@ -5,7 +5,6 @@ import StationModel from 'src/app/shared/station.model';
 import MediaModel from 'src/app/shared/media.model';
 import AreaModel from 'src/app/shared/area.model';
 import { ModalService } from 'src/app/_modal';
-import { currentId } from 'async_hooks';
 
 @Component({
   selector: 'app-station',
