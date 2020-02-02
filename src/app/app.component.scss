@@ -1,6 +1,18 @@
-img{
-    height: 1cm;
-    width: auto;
+$h-blau: #005597;
+$h-hellblau: #000000;
+$h-gray: #000000;
+
+*{
+	font-family: Helvetica;
+}
+body{
+    display: grid;
+    grid-template-columns: 10% 90%;
+    grid-gap: 20px;
+    margin: 0px;
+    padding: 0px;
+    background-color: #E5E5E5;
+	margin-right: 20px;
 }
 
 $h-blau: #005597;
