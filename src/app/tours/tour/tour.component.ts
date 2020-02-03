@@ -14,7 +14,18 @@ import { ModalService } from '../../_modal';
 })
 export class TourComponent implements OnInit {
   currentTour: TourModel;
-  currentStations: StationModel[];
+  currentStations: StationModel[] = [{
+    id : 1,
+    name: "Station A",
+    area_id: 1,
+    ordernumber: 1
+  },{
+    id : 2,
+    name: "Station B",
+    area_id: 1,
+    ordernumber: 1
+  }
+]
   allStations: StationModel[] = null;
   zwtableinfos: any;
   temps: any;
