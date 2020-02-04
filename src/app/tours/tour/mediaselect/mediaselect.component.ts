@@ -17,26 +17,7 @@ import * as $ from 'jquery';
 export class MediaselectComponent implements OnInit {
   currentTour: TourModel;
   currentStation: StationModel;
-  currentMedias: MediaModel[] = [{
-    id: 1,
-    caption: "Media A",
-    text: "Dies ist ein Text.",
-    language_id: 1,
-    station_id: 1
-  },{
-    id: 2,
-    caption: "Media B",
-    text: "Dies ist ein Text.",
-    language_id: 1,
-    station_id: 1
-  },{
-    id: 3,
-    caption: "Media C",
-    text: "Dies ist ein Text.",
-    language_id: 1,
-    station_id: 1
-  }
-];
+  currentMedias: MediaModel[] = null;
   allavailableMedia: MediaModel[];
 
   constructor(private router: Router, private http: HttpClient, private tourservice: TourservicesService) { 

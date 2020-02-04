@@ -13,17 +13,7 @@ import { ModalService } from 'src/app/_modal';
 })
 export class StationComponent implements OnInit {
   currentstation: StationModel;
-  media: MediaModel[] = [{
-    id: 1,
-    caption: "Media A",
-    language_id: 1,
-    station_id: 1
-  },{
-    id: 2,
-    caption: "Media B",
-    language_id: 1,
-    station_id: 1
-  }];
+  media: MediaModel[];
   areas: AreaModel[];
   tosavemedias = [];
 

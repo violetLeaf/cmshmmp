@@ -10,18 +10,6 @@ import AreaModel from '../shared/area.model';
   styleUrls: ['./stations.component.scss']
 })
 export class StationsComponent implements OnInit {
-  station: StationModel[] = [{
-    id : 1,
-    name: "Station A",
-    area_id: 1,
-    ordernumber: 1
-  },{
-    id : 2,
-    name: "Station B",
-    area_id: 1,
-    ordernumber: 1
-  }
-]
   areas: AreaModel[] = [];
   stationsarray: StationModel[] = [];
   standardStation: StationModel = {
@@ -49,8 +37,8 @@ export class StationsComponent implements OnInit {
   }
 
   public get sortedStations(){
-    if (this.station != null)
-      return this.station.sort((a, b)=> {return a.id - b.id});
+    if (this.stationsarray != null)
+      return this.stationsarray.sort((a, b)=> {return a.id - b.id});
     else
       return null;
   }

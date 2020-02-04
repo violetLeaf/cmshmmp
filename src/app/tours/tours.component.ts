@@ -10,19 +10,7 @@ import { TourservicesService } from '../shared/services/tourservices.service';
   styleUrls: ['./tours.component.scss']
 })
 export class ToursComponent implements OnInit {
-  toursarray: TourModel[] = [{
-    id: 1,
-    title: "Tour A",
-    reversible: true,
-    date: new Date()
-  },
-  {
-    id: 2,
-    title: "Tour B",
-    reversible: true,
-    date: new Date()
-  }
-];
+  toursarray: TourModel[] = [];
   standardTour: TourModel= {
     id: -1,
     title: null,
