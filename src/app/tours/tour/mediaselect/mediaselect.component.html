@@ -4,7 +4,8 @@
     <div class="mediabox">
         <p>Elements</p>
         <div id="medias" class="medias">
-            <p  *ngFor="let m of sortedMedia" (click)="onmediaclick(m.id, m)" id="{{ m.id }}" [ngClass]= "allavailableMedia.active ? 'active' : 'inactive'">{{ m.caption }} {{ m.text }}</p>
+            <p  *ngFor="let m of currentMedias" >{{ m.caption }} {{ m.text }}</p>
+            <!-- (click)="onmediaclick(m.id, m)" id="{{ m.id }}" [ngClass]= "allavailableMedia.active ? 'active' : 'inactive'" -->
         </div>
     </div>
 </div>
