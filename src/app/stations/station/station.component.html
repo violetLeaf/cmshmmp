@@ -19,13 +19,16 @@
             <div class="media" id="mediaoutput">
                 <p *ngFor="let m of sortedMedia">{{ m.caption }} {{ m.text }}</p>
             </div>
-            <p (click)="openmodal()">+</p>
+            <span (click)="openmodal()"><img src="../../../assets/icons/plussymbol_leer.png" alt=""></span>
             <jw-modal id="ov_media">
                 <div id="ov_div">
                     <p>Please enter Text here:</p>
                     <input type="text" id="mediainput">
                 </div>
-                <span (click)="closemodal()"><img src="../../../assets/icons/x.png" alt="">[ Close & Save ]</span>
+                <span (click)="closemodal()">
+                    <img src="../../../assets/icons/x.png" alt="X">
+                    <img src="../../../assets/icons/save.png" alt="">
+                </span>
             </jw-modal>
         </div>
     </div>
