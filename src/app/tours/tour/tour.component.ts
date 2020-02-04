@@ -4,8 +4,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import TourModel from 'src/app/shared/tour.model';
 import { DatePipe } from '@angular/common';
 import StationModel from 'src/app/shared/station.model';
-import { TourservicesService } from '../../shared/services/tourservices.service';
-import { ModalService } from '../../_modal';
+import { TourservicesService } from 'src/app/shared/services/tourservices.service';
+import { ModalService } from 'src/app/_modal';
 
 @Component({
   selector: 'app-tour',
