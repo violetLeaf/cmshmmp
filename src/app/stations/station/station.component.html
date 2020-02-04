@@ -1,28 +1,32 @@
-<h1>Create / Edit Elements</h1>
+<div class="stationwrapper">
+    <h1>CREATE / EDIT ELEMENTS</h1>
 
-<div class="generalinfo">
-    <p><span>Name:</span> <input id="name" type="text" value="{{ currentstation.name }}"></p>
-    <div class="areabox">
-        <select id="area">
-            <option id="-1">-- please select area --</option>
-            <option *ngFor="let a of sortedArea" id="{{ a.id }}">{{ a.title }}</option>
-        </select>
-    </div>
-    <span (click)="save()"><img src="../../../assets/icons/save.png" alt="Save"></span>
-    <span (click)="delete()"><img src="../../../assets/icons/trash.png" alt="Delete"></span>
-</div>
-
-<div class="media">
-    <p>Medias:</p>
-    <div class="media" id="mediaoutput">
-        <p *ngFor="let m of sortedMedia">{{ m.caption }} {{ m.text }}</p>
-    </div>
-    <p (click)="openmodal()">+</p>
-    <jw-modal id="ov_media">
-        <div id="ov_div">
-            <p>Please enter Text here:</p>
-            <input type="text" id="mediainput">
+    <div class="stationbox">
+        <div class="generalinfo">
+            <p><span>Name: </span> <input id="name" type="text" value="{{ currentstation.name }}"></p>
+            <div class="areabox">
+                <select id="area">
+                    <option id="-1">-- please select area --</option>
+                    <option *ngFor="let a of sortedArea" id="{{ a.id }}">{{ a.title }}</option>
+                </select>
+            </div>
+            <span (click)="save()"><img src="../../../assets/icons/save.png" alt="Save"></span>
+            <span (click)="delete()"><img src="../../../assets/icons/trash.png" alt="Delete"></span>
         </div>
-        <span (click)="closemodal()"><img src="../../../assets/icons/x.png" alt="">[ Close & Save ]</span>
-    </jw-modal>
+        
+        <div class="media">
+            <p>Medias: </p>
+            <div class="media" id="mediaoutput">
+                <p *ngFor="let m of sortedMedia">{{ m.caption }} {{ m.text }}</p>
+            </div>
+            <p (click)="openmodal()">+</p>
+            <jw-modal id="ov_media">
+                <div id="ov_div">
+                    <p>Please enter Text here:</p>
+                    <input type="text" id="mediainput">
+                </div>
+                <span (click)="closemodal()"><img src="../../../assets/icons/x.png" alt="">[ Close & Save ]</span>
+            </jw-modal>
+        </div>
+    </div>
 </div>

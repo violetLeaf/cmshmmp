@@ -4,7 +4,11 @@
     <div class="mediabox">
         <p>Elements</p>
         <div id="medias" class="medias">
+<<<<<<< Updated upstream
             <p  *ngFor="let m of sortedMedia" (click)="onmediaclick(m.id, m)" id="{{ m.id }}" [ngClass]= "allavailableMedia.active ? 'active' : 'inactive'">{{ m.caption }} {{ m.text }}</p>
+=======
+            <p  *ngFor="let m of currentMedias" (click)="onmediaclick(m.id, m)" id="{{ m.id }}" [ngClass]= "allavailableMedia.active ? 'active' : 'inactive'">{{ m.caption }} {{ m.text }}</p>
+>>>>>>> Stashed changes
         </div>
     </div>
 </div>

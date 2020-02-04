@@ -1,9 +1,9 @@
 .medias .active{
-    color: green;
+    color: rgb(0,85,151);
 }
 
 .medias .inactive{
-    color: red;
+    color: rgb(233, 200, 200);
 }
 
 $lightgray: #E5E5E5;
@@ -14,12 +14,28 @@ $blue: rgb(0,85,151);
 
 *{
     font-size: 0.95em;
+    font-family: Helvetica;
+}
+input[type=text]{
+    border: none;
+    border-bottom: 1px solid $darkgray;
+    color: black;
+    font-weight: bold;
+    margin-left: 10px;
+    width: 200px;
+
+}
+select{
+    padding: 5px;
+    color: $darkgray;
+    font-weight: bold;
+    border-radius: 20px;
 }
 .mediawrapper{
     position: fixed;
     top: 80px;
     left: 200px;
-    width: 1210px;
+    width: 84%;
     background-color: white;
     border-radius: 20px;
 	margin-bottom: 20px;

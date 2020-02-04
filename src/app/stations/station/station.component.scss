@@ -1,3 +1,55 @@
-.areabox{
+$lightgray: #E5E5E5;
+$darkgray: #A3A3A3;
+$blackgray: #5B5B5B;
+$lightblue: rgb(0,0,0);
+$blue: rgb(0,85,151);
+
+
+*{
+	font-family: Helvetica;
+}
+input[type=text]{
+    border: none;
+    border-bottom: 1px solid $darkgray;
+    color: black;
+    font-weight: bold;
+    margin-left: 10px;
+    width: 200px;
+    padding: 5px;
+}
+select{
+    padding: 5px;
+    color: $darkgray;
+    font-weight: bold;
+    border-radius: 20px;
+}
+.stationwrapper{
+    position: fixed;
+    top: 80px;
+    left: 200px;
+    width: 84%;
+    background-color: white;
+    border-radius: 20px;
+	margin-bottom: 20px;
+	height: 620px;
+    margin-right: 20px;
+}
+h1{
+    font-size: 1.2em;
+    position: fixed;
+    top: 28px;
+    color: $blackgray;
+    left: 200px;
+}
+.stationbox{
     margin: 20px;
+}
+.stationbox p{
+    color: $darkgray;
+    font-weight: bold;
+}
+.generalinfo{
+    display: grid;
+    grid-template-columns: 25% 67% 4% 4%;
+    margin-bottom: 40px;
 }

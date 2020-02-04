@@ -6,6 +6,8 @@ $blue: rgb(0,85,151);
 
 *{
     font-size: 0.95em;
+    font-family: Helvetica;
+
 }
 
 $lightgray: #E5E5E5;
@@ -17,11 +19,26 @@ $blue: rgb(0,85,151);
 *{
     font-size: 0.95em;
 }
+input[type=text]{
+    border: none;
+    border-bottom: 1px solid $darkgray;
+    color: black;
+    font-weight: bold;
+    margin-left: 10px;
+    width: 200px;
+    padding: 5px;
+}
+select{
+    padding: 5px;
+    color: $darkgray;
+    font-weight: bold;
+    border-radius: 20px;
+}
 .wrapper{
     position: fixed;
     top: 80px;
     left: 200px;
-    width: 1000px;
+    width: 69.5%;
     background-color: white;
     border-radius: 20px;
 	height: 620px;
@@ -51,11 +68,9 @@ $blue: rgb(0,85,151);
     color: $blue;
 }
 .newtourplus{
-    font-size: 3em;
-    color: gray;
     position: fixed;
-    bottom: 130px;
-    right: 280px;
+    top: 80%;
+    left: 77%;
 }
 h1, h2{
     font-size: 1.2em;
@@ -67,5 +82,5 @@ h1{
     left: 200px;
 }
 h2{
-    left: 1220px;
+    left: 85%;
 }
