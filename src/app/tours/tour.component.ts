@@ -4,8 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import TourModel from 'src/app/shared/tour.model';
 import { DatePipe } from '@angular/common';
 import StationModel from 'src/app/shared/station.model';
-import { TourservicesService } from '../../shared/services/tourservices.service';
-import { ModalService } from '../../_modal';
+import { ModalService } from '../_modal';
 
 @Component({
   selector: 'app-tour',
@@ -14,23 +13,12 @@ import { ModalService } from '../../_modal';
 })
 export class TourComponent implements OnInit {
   currentTour: TourModel;
-  currentStations: StationModel[] = [{
-    id : 1,
-    name: "Station A",
-    area_id: 1,
-    ordernumber: 1
-  },{
-    id : 2,
-    name: "Station B",
-    area_id: 1,
-    ordernumber: 1
-  }
-]
+  currentStations: StationModel[];
   allStations: StationModel[] = null;
   zwtableinfos: any;
   temps: any;
 
-  constructor(private router: Router, private http: HttpClient, private tourService: TourservicesService, private modalService: ModalService) { 
+  constructor(private router: Router, private http: HttpClient, private modalService: ModalService) { 
     let stateData = this.router.getCurrentNavigation().extras.state.data;
 
     if (stateData !== undefined) {
