@@ -1,0 +1,8 @@
+<h1>CREATE / EDIT AREAS</h1>
+<div>
+    <div class="toursitem" *ngFor="let a of sortedAreas;" (click)="onAreaClick(a)">
+        <p class="name">{{ a.title }} </p>
+    </div>
+    <span (click)="onAreaClick(standardArea)" class="newtourplus"><img src="../../assets/icons/plussymbol_leer.png" alt="+"></span>
+
+</div>

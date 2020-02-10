@@ -1,0 +1,8 @@
+<h1>CREATE / EDIT LANGUAGES</h1>
+<div>
+    <div class="toursitem" *ngFor="let l of sortedLanguages;" (click)="onlanguageClick(l)">
+        <p class="name">{{ l.name }} </p>
+    </div>
+    <span (click)="onlanguageClick(standardLanguage)" class="newtourplus"><img src="../../assets/icons/plussymbol_leer.png" alt="+"></span>
+
+</div>

@@ -14,6 +14,10 @@ import { NotfoundpageComponent } from './notfoundpage/notfoundpage.component';
 import { TemplatesComponent } from './templates/templates.component';
 import { TemplateComponent } from './templates/template/template.component';
 import { MediaselectComponent } from './tours/tour/mediaselect/mediaselect.component';
+import { AreasComponent } from './areas/areas.component';
+import { AreaComponent } from './areas/area/area.component';
+import { LanguagesComponent } from './languages/languages.component';
+import { LanguageComponent } from './languages/language/language.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +29,11 @@ import { MediaselectComponent } from './tours/tour/mediaselect/mediaselect.compo
     NotfoundpageComponent,
     TemplatesComponent,
     TemplateComponent,
-    MediaselectComponent
+    MediaselectComponent,
+    AreasComponent,
+    AreaComponent,
+    LanguagesComponent,
+    LanguageComponent
   ],
   imports: [
     BrowserModule,
