@@ -13,7 +13,7 @@
                 <p><input id="title" type="text" value="{{ currentTour.title }}"></p>
                 <p><input id="date" type="datetime-local" value="{{ dateformated() }}"></p>
                 <p><input id="guide" type="text" value="{{ currentTour.guide }}"></p>
-                <p><input type="checkbox" id="reversible"></p>
+                <p><input type="checkbox" id="reversible" [checked]="currentTour.reversible"></p>
 
                 <span (click)="save()"><img src="../../../assets/icons/save.png" alt="Save"></span>
                 <span (click)="delete()"><img src="../../../assets/icons/trash.png" alt="Delete"></span>
@@ -23,7 +23,7 @@
                 <p>Stations</p>
                 <div class="stationwrapper">
                     <div id="selstations" class="station">
-                        <p *ngFor="let s of allStations" (click)="onStationClick(s , currentTour)" id="{{ s.id }}">{{ s.name }}</p>
+                        <p *ngFor="let s of sortedStations" (click)="onStationClick(s , currentTour)" id="{{ s.id }}">{{ s.name }}</p>
                     </div>
 
                     <jw-modal id="ov_stations">

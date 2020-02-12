@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import {Router} from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import StationModel from 'src/app/shared/station.model';
 import MediaModel from 'src/app/shared/media.model';
 import AreaModel from 'src/app/shared/area.model';
 import { ModalService } from 'src/app/_modal';
+import LanguageModel from 'src/app/shared/language.model';
 
 @Component({
   selector: 'app-station',
@@ -15,7 +16,8 @@ export class StationComponent implements OnInit {
   currentstation: StationModel;
   media: MediaModel[];
   areas: AreaModel[];
-  tosavemedias = [];
+  languages: LanguageModel[];
+  tosavemedias: MediaModel[] = [];
 
   constructor(private router: Router, private http: HttpClient, private modalService : ModalService) {
     let stateData = this.router.getCurrentNavigation().extras.state.data;
@@ -35,6 +37,9 @@ export class StationComponent implements OnInit {
     this.http.get<AreaModel[]>("http://localhost:3000/areas").subscribe((res) => {
       this.areas = res;
     });
+    this.http.get<LanguageModel[]>("http://localhost:3000/languages").subscribe((res) => {
+      this.languages = res;
+    });
    }
 
   ngOnInit() {
@@ -44,7 +49,7 @@ export class StationComponent implements OnInit {
     if (this.media != null)
       return this.media.sort((a, b)=> {return a.id - b.id});
     else if (this.tosavemedias != null)
-      return this.tosavemedias.sort((a, b)=> {return a.name - b.name});
+      return this.tosavemedias;
     else
       return null;
   }
@@ -56,6 +61,13 @@ export class StationComponent implements OnInit {
       return null;
   }
 
+  public get sortedLanguages(){
+    if (this.languages != null)
+      return this.languages.sort((a, b)=> {return a.id - b.id});
+    else
+      return null;
+  }
+
   openmodal(){
     (<HTMLInputElement>document.getElementById("mediainput")).value = "";
     this.modalService.open("ov_media");
@@ -63,22 +75,27 @@ export class StationComponent implements OnInit {
 
   closemodal(){
     var text = (<HTMLInputElement>document.getElementById("mediainput")).value;
-    console.log(text);
-    if (text != ""){
-      if (this.currentstation.id != -1){
-        this.http.post("http://localhost:3000/posttext", {"text": text, "station_id": this.currentstation.id}).subscribe(function(res){
-          console.log(res);
-        }.bind(this));
-      }
-      else if (this.currentstation.id == -1){
-        this.tosavemedias.push(text);
-        (<HTMLElement>document.getElementById("mediaoutput")).innerHTML = "";
-        this.sortedMedia.forEach(e => {
-          (<HTMLElement>document.getElementById("mediaoutput")).innerHTML += "<p>" + e + "</p>";
-        });
-      }
 
-      this.modalService.close("ov_media");
+    if (text != ""){
+      var e = (<HTMLSelectElement>document.getElementById("language"));
+      if (+e.options[e.selectedIndex].id != -1){
+        if (this.currentstation.id != -1){
+            this.http.post("http://localhost:3000/posttext", {"text": text, "language_id": +e.options[e.selectedIndex].id, "station_id": this.currentstation.id}).subscribe(function(res){
+              console.log(res);
+            }.bind(this));
+        }
+        else if (this.currentstation.id == -1){
+            this.tosavemedias.push({"id": -1, "caption": null, "text": text, "language_id": +e.options[e.selectedIndex].id, "station_id": -1});
+            (<HTMLElement>document.getElementById("mediaoutput")).innerHTML = "";
+            this.tosavemedias.forEach(e => {
+              (<HTMLElement>document.getElementById("mediaoutput")).innerHTML += "<p>" + e.text + "</p>";
+            });
+        }
+
+          this.modalService.close("ov_media");
+      }
+      else
+        alert("Please select Language!");
     }
     else{
       if(confirm("No value added. Cancel?"))
@@ -88,7 +105,7 @@ export class StationComponent implements OnInit {
 
   save(){
     try{
-      var e = (<HTMLSelectElement>document.getElementById("area"))
+      var e = (<HTMLSelectElement>document.getElementById("area"));
       this.currentstation = {
         id : this.currentstation.id,
         name : (<HTMLInputElement>document.getElementById("name")).value,
@@ -107,7 +124,7 @@ export class StationComponent implements OnInit {
           id = res.insertId;
 
           this.tosavemedias.forEach(e => {
-            this.http.post("http://localhost:3000/posttext", {"text": e, "station_id": id}).subscribe(function(res){
+            this.http.post("http://localhost:3000/posttext", {"text": e.text, "language_id": e.language_id, "station_id": id}).subscribe(function(res){
               console.log(res);
             }.bind(this));
           });

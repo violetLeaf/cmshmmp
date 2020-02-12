@@ -48,7 +48,6 @@ export class TourComponent implements OnInit {
       return this.currentStations.sort((a, b)=> {return a.ordernumber - b.ordernumber});
     else
       return null;
-    // return null;
   }
 
   dateformated(){

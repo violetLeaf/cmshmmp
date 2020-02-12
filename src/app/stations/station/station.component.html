@@ -6,8 +6,8 @@
             <p><span>Name: </span> <input id="name" type="text" value="{{ currentstation.name }}"></p>
             <div class="areabox">
                 <select id="area">
-                    <option id="-1">-- please select area --</option>
-                    <option *ngFor="let a of sortedArea" id="{{ a.id }}">{{ a.title }}</option>
+                    <option id="-1" selected>-- please select area --</option>
+                    <option *ngFor="let a of sortedArea" id="{{ a.id }}" [selected]="a.id == currentstation.area_id">{{ a.title }}</option>
                 </select>
             </div>
             <span (click)="save()"><img src="../../../assets/icons/save.png" alt="Save"></span>
@@ -21,6 +21,13 @@
             </div>
             <span (click)="openmodal()"><img src="../../../assets/icons/plussymbol_leer.png" alt=""></span>
             <jw-modal id="ov_media">
+                <div class="areabox">
+                    <p>Please select Language for the entered Medias below:</p>
+                    <select id="language">
+                        <option id="-1">-- please select language --</option>
+                        <option *ngFor="let l of sortedLanguages" id="{{ l.id }}">{{ l.name }}</option>
+                    </select>
+                </div>
                 <div id="ov_div">
                     <p>Please enter Text here:</p>
                     <input type="text" id="mediainput">

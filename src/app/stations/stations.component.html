@@ -3,14 +3,14 @@
 
     <div class="areabox">
         <span>Area: </span>
-        <select id="area">
+        <select id="area" (change)="onareaselected(this.areas)">
             <option id="-1" selected>-- all --</option>
-            <option *ngFor="let a of sortedArea" id="a.id">{{ a.title }}</option>
+            <option *ngFor="let a of sortedArea" id="{{ a.id }}">{{ a.title }}</option>
         </select>
     </div>
 
     <div class="stationsbox">
-        <p *ngFor="let t of sortedStations" (click)="onStationClick(t)" id="{{ t.id }}" class="stationitem">{{ t.name }}</p>
+        <p *ngFor="let t of StationsToShow" (click)="onStationClick(t)" id="{{ t.id }}" class="stationitem">{{ t.name }}</p>
         
         <span (click)="onStationClick(standardStation)"><img src="../../../assets/icons/plussymbol_leer.png" alt="+"></span>
     </div>

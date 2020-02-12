@@ -12,6 +12,7 @@ import AreaModel from '../shared/area.model';
 export class StationsComponent implements OnInit {
   areas: AreaModel[] = [];
   stationsarray: StationModel[] = [];
+  stationstoshow: StationModel[] = [];
   standardStation: StationModel = {
     id: -1,
     name: "Standard Station",
@@ -32,7 +33,6 @@ export class StationsComponent implements OnInit {
   ngOnInit() {  }
 
   onStationClick(station: StationModel) {
-
     this.router.navigate(['stations/station'], {state: {data: {station}}});
   }
 
@@ -42,10 +42,28 @@ export class StationsComponent implements OnInit {
     else
       return null;
   }
+  public get StationsToShow(){
+    if (+(<HTMLOptionElement>document.getElementById("area")[(<HTMLSelectElement>document.getElementById("area")).selectedIndex]).id == -1)
+      return this.sortedStations;
+    else
+      return this.stationstoshow;
+  }
   public get sortedArea(){
     if (this.areas != null)
       return this.areas.sort((a, b)=> {return a.position - b.position});
     else
       return null;
+  }
+
+  onareaselected(areas:any){
+    // var index = (<HTMLSelectElement>document.getElementById("area")).selectedIndex;
+    var id = +(<HTMLOptionElement>document.getElementById("area")[(<HTMLSelectElement>document.getElementById("area")).selectedIndex]).id;
+
+    this.stationstoshow = [];
+    this.sortedStations.forEach(e => {
+      if (e.area_id == id){
+        this.stationstoshow.push(e);
+      }
+    });
   }
 }
