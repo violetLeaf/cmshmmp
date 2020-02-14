@@ -20,10 +20,14 @@
             </div>
             
             <div class="stations">
-                <p>Stations</p>
+                <p>Stations:</p>
                 <div class="stationwrapper">
                     <div id="selstations" class="station">
-                        <p *ngFor="let s of sortedStations" (click)="onStationClick(s , currentTour)" id="{{ s.id }}">{{ s.name }}</p>
+                        <p *ngFor="let s of sortedStations">
+                            <input type="button" id="{{ s.id }}" (click)="move('up', s.ordernumber)">
+                            <span (click)="onStationClick(s , currentTour)" id="{{ s.id }}">{{ s.name }}</span>
+                            <input type="button" id="{{ s.id }}" (click)="move('down', s.ordernumber)">
+                        </p>
                     </div>
 
                     <jw-modal id="ov_stations">

@@ -33,21 +33,25 @@ export class LanguageComponent implements OnInit {
 
       var id: number;
 
-      if (this.currentlanguage.id == -1){
-        console.log(this.currentlanguage.name);
-        this.http.post("http://localhost:3000/postlanguage", {"name": this.currentlanguage.name})
-        .subscribe(function(res) {
-          console.log(res);
-          this.currentlanguage = res;
-        }.bind(this));
+      if( this.currentlanguage.name != "" && this.currentlanguage.name != null){
+        if (this.currentlanguage.id == -1){
+          console.log(this.currentlanguage.name);
+          this.http.post("http://localhost:3000/postlanguage", {"name": this.currentlanguage.name})
+          .subscribe(function(res) {
+            console.log(res);
+            this.currentlanguage = res;
+          }.bind(this));
 
-        alert("New Language created.");
+          alert("New Language created.");
 
-        this.router.navigate(['/languages']);
+          this.router.navigate(['/languages']);
+        }
+        else if (this.currentlanguage.id != -1){
+          console.log("Language überarbeiten");
+        }
       }
-      else if (this.currentlanguage.id != -1){
-        console.log("Language überarbeiten");
-      }
+      else
+        alert("Eingaben überprüfen!");
     }
     catch(err){
       console.log("an error occured: " + err);

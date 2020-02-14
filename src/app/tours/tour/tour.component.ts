@@ -6,6 +6,7 @@ import { DatePipe } from '@angular/common';
 import StationModel from 'src/app/shared/station.model';
 import { TourservicesService } from 'src/app/shared/services/tourservices.service';
 import { ModalService } from 'src/app/_modal';
+import LanguageModel from 'src/app/shared/language.model';
 
 @Component({
   selector: 'app-tour',
@@ -16,6 +17,7 @@ export class TourComponent implements OnInit {
   currentTour: TourModel;
   currentStations: StationModel[];
   allStations: StationModel[] = null;
+  languages: LanguageModel[];
   zwtableinfos: any;
   temps: any;
 
@@ -35,6 +37,10 @@ export class TourComponent implements OnInit {
 
     this.http.get<StationModel[]>("http://localhost:3000/stations").subscribe((res) => {
       this.allStations = res;
+    });
+
+    this.http.get<LanguageModel[]>("http://localhost:3000/languages").subscribe((res) => {
+      this.languages = res;
     });
 
   // this.currentStations = tourService.getallStationsforTour(this.currentTour.id);
@@ -100,6 +106,15 @@ export class TourComponent implements OnInit {
       station.className = "selected";
     }
   }
+  
+  move(direction:string, pos:number){
+    if (direction == "up"){
+      console.log("move up: " + pos);
+    }
+    else if (direction == "down"){
+      console.log("move down: " + pos);
+    }
+  }
 
   save(){
     try{
@@ -121,26 +136,36 @@ export class TourComponent implements OnInit {
       // console.log(this.currentTour);
       // console.log((<HTMLInputElement>document.getElementById("reversible")).checked);
 
-      if (this.currentTour.id == -1){
-        this.http.post("http://localhost:3000/posttour", [this.currentTour, this.zwtableinfos])
-        .subscribe(function(res) {
-           this.currentTour=res;
-        }.bind(this));
+      if(this.currentTour.title != "" && this.currentTour.title != null && this.currentTour.date != undefined && this.currentTour.reversible != undefined){
 
-        
-        // this.zwtableinfos.forEach(e => {
-        //   this.http.post("http://localhost:3000/posttourstations", e).subscribe(function(res) {
-        //     this.currentTour=res;
-        //   }.bind(this));
-        // });
-        
-        alert("New Tour created.");
+        var id:number;
 
-        this.router.navigate(['']);
+        if (this.currentTour.id == -1){
+          // {"title": this.currentTour.title, "reversible": this.currentTour.reversible, "template_id": this.currentTour.template_id, "guide": this.currentTour.guide, "date": this.currentTour.date}
+          this.http.post("http://localhost:3000/posttour", {"title": this.currentTour.title, "reversible": this.currentTour.reversible, "template_id": this.currentTour.template_id, "guide": this.currentTour.guide, "date": this.currentTour.date})
+          .subscribe(function(res) {
+            this.currentTour=res;
+
+            id = res.insertId;
+
+            // hier stimmt noch etwas nicht!
+            for(var i = 0; i < this.currentStations.length; i++){
+              this.http.post("http://localhost:3000/posttourstations", {"tour_id": id, "station_id": this.currentStations[i].id, "media_id": 53, "ordernumber": (Math.random() * 1000000)}).subscribe(function(res) {
+                console.log(res);
+              }.bind(this));
+            }
+          }.bind(this));
+          
+          alert("New Tour created.");
+
+          this.router.navigate(['']);
+        }
+        else if (this.currentTour.id != -1){
+          console.log("Tour überarbeiten");
+        }
       }
-      else if (this.currentTour.id != -1){
-        console.log("Tour überarbeiten");
-      }
+      else
+        alert("Eingaben überprüfen!");
     }
     catch(err){
       console.log("an error occured: " + err);

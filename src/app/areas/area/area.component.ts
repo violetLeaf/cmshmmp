@@ -29,26 +29,31 @@ export class AreaComponent implements OnInit {
       this.currentarea = {
         id : this.currentarea.id,
         title : (<HTMLInputElement>document.getElementById("title")).value,
-        position: +(<HTMLInputElement>document.getElementById("position")).value
+        // position: +(<HTMLInputElement>document.getElementById("position")).value
+        position: this.currentarea.position
       };
 
       var id: number;
 
-      if (this.currentarea.id == -1){
-        console.log(this.currentarea.title + this.currentarea.position);
-        this.http.post("http://localhost:3000/postarea", {"title": this.currentarea.title, "position": this.currentarea.position})
-        .subscribe(function(res) {
-          console.log(res);
-          this.currentarea = res;
-        }.bind(this));
+      if(this.currentarea.position != null && this.currentarea.title != null && this.currentarea.title != ""){
+        if (this.currentarea.id == -1){
+          console.log(this.currentarea.title + this.currentarea.position);
+          this.http.post("http://localhost:3000/postarea", {"title": this.currentarea.title, "position": this.currentarea.position})
+          .subscribe(function(res) {
+            console.log(res);
+            this.currentarea = res;
+          }.bind(this));
 
-        alert("New Area created.");
+          alert("New Area created.");
 
-        this.router.navigate(['/areas']);
+          this.router.navigate(['/areas']);
+        }
+        else if (this.currentarea.id != -1){
+          console.log("Area überarbeiten");
+        }
       }
-      else if (this.currentarea.id != -1){
-        console.log("Area überarbeiten");
-      }
+      else
+        alert("Eingaben überprüfen!");
     }
     catch(err){
       console.log("an error occured: " + err);

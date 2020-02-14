@@ -115,28 +115,32 @@ export class StationComponent implements OnInit {
 
       var id: number;
 
-      if (this.currentstation.id == -1){
-        console.log(this.currentstation.name + this.currentstation.area_id);
-        this.http.post("http://localhost:3000/poststation", {"name": this.currentstation.name, "area_id": this.currentstation.area_id})
-        .subscribe(function(res) {
-          console.log(res);
-          this.currentstation = res;
-          id = res.insertId;
+      if(this.currentstation.name != "" && this.currentstation.name != null && !isNaN(this.currentstation.ordernumber)){
+        if (this.currentstation.id == -1){
+          console.log(this.currentstation.name + this.currentstation.area_id);
+          this.http.post("http://localhost:3000/poststation", {"name": this.currentstation.name, "area_id": this.currentstation.area_id})
+          .subscribe(function(res) {
+            console.log(res);
+            this.currentstation = res;
+            id = res.insertId;
 
-          this.tosavemedias.forEach(e => {
-            this.http.post("http://localhost:3000/posttext", {"text": e.text, "language_id": e.language_id, "station_id": id}).subscribe(function(res){
-              console.log(res);
-            }.bind(this));
-          });
-        }.bind(this));
+            this.tosavemedias.forEach(e => {
+              this.http.post("http://localhost:3000/posttext", {"text": e.text, "language_id": e.language_id, "station_id": id}).subscribe(function(res){
+                console.log(res);
+              }.bind(this));
+            });
+          }.bind(this));
 
-        alert("New Station created.");
+          alert("New Station created.");
 
-        this.router.navigate(['/stations']);
+          this.router.navigate(['/stations']);
+        }
+        else if (this.currentstation.id != -1){
+          console.log("Tour überarbeiten");
+        }
       }
-      else if (this.currentstation.id != -1){
-        console.log("Tour überarbeiten");
-      }
+      else
+        alert("Eingaben überprüfen!");
     }
     catch(err){
       console.log("an error occured: " + err);

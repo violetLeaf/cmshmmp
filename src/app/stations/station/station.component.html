@@ -19,6 +19,7 @@
             <div class="media" id="mediaoutput">
                 <p *ngFor="let m of sortedMedia">{{ m.caption }} {{ m.text }}</p>
             </div>
+
             <span (click)="openmodal()"><img src="../../../assets/icons/plussymbol_leer.png" alt=""></span>
             <jw-modal id="ov_media">
                 <div class="areabox">
