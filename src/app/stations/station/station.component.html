@@ -17,7 +17,7 @@
         <div class="media">
             <p>Medias: </p>
             <div class="media" id="mediaoutput">
-                <p *ngFor="let m of sortedMedia">{{ m.caption }} {{ m.text }}</p>
+                <p *ngFor="let m of sortedMedia" (click)="deleteMedia(m.id)">{{ m.caption }} {{ m.text }}</p>
             </div>
 
             <span (click)="openmodal()"><img src="../../../assets/icons/plussymbol_leer.png" alt=""></span>

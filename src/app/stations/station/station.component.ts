@@ -114,8 +114,9 @@ export class StationComponent implements OnInit {
       };
 
       var id: number;
+      console.log(this.currentstation.ordernumber);
 
-      if(this.currentstation.name != "" && this.currentstation.name != null && !isNaN(this.currentstation.ordernumber)){
+      if(this.currentstation.name != "" && this.currentstation.name != null){
         if (this.currentstation.id == -1){
           console.log(this.currentstation.name + this.currentstation.area_id);
           this.http.post("http://localhost:3000/poststation", {"name": this.currentstation.name, "area_id": this.currentstation.area_id})
@@ -136,7 +137,13 @@ export class StationComponent implements OnInit {
           this.router.navigate(['/stations']);
         }
         else if (this.currentstation.id != -1){
-          console.log("Tour überarbeiten");
+          this.http.put("http://localhost:3000/updatestation", this.currentstation).subscribe(function(res) {
+            console.log(res);
+            this.currentarea = res;
+          }.bind(this));
+
+          alert("Station updated.");
+          this.router.navigate(['/stations']);
         }
       }
       else
@@ -161,6 +168,19 @@ export class StationComponent implements OnInit {
       this.router.navigate(['/stations']);
     else{
       console.log("An error occured when trying to delete.");
+    }
+  }
+
+  deleteMedia(id:number){
+    if(confirm("Do you want to delete?")){
+      const httpOpt = {
+        headers: new HttpHeaders({ 'Content-Type': 'application/json' }), body: {"table" : "media", "id" : id}
+      };
+      this.http.delete("http://localhost:3000/delete", httpOpt).subscribe(function(res){
+        console.log("Media deleted! " + res);
+      }.bind(this));
+
+      console.log("Delete Media.");
     }
   }
 }

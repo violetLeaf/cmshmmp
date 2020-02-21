@@ -49,7 +49,13 @@ export class AreaComponent implements OnInit {
           this.router.navigate(['/areas']);
         }
         else if (this.currentarea.id != -1){
-          console.log("Area überarbeiten");
+          this.http.put("http://localhost:3000/updatearea", this.currentarea).subscribe(function(res) {
+            console.log(res);
+            this.currentarea = res;
+          }.bind(this));
+
+          alert("Area updated.");
+          this.router.navigate(['/areas']);
         }
       }
       else

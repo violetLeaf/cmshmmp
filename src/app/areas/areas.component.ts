@@ -33,13 +33,17 @@ export class AreasComponent implements OnInit {
     this.router.navigate(['areas/area'], {state: {data: {area}}});
   }
 
-  move(direction:string, pos:number){
-    if (direction == "up"){
-      console.log("move up: " + pos);
-    }
-    else if (direction == "down"){
-      console.log("move down: " + pos);
-    }
+  move(direction:string, area:AreaModel){
+    console.log(this.areas.length);
+    
+    if (direction == "up" && area.position != 1)
+      area.position -= 1;
+    else if (direction == "down" && area.position < this.areas.length)
+      area.position += 1;
+      
+    this.http.put("http://localhost:3000/updateareapos", {"direction": direction, "id": area.id, "position": area.position}).subscribe(function(res) {
+      console.log(res);
+    }.bind(this));
   }
 
   public get sortedAreas(){

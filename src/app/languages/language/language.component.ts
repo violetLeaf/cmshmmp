@@ -43,11 +43,15 @@ export class LanguageComponent implements OnInit {
           }.bind(this));
 
           alert("New Language created.");
-
           this.router.navigate(['/languages']);
         }
         else if (this.currentlanguage.id != -1){
-          console.log("Language überarbeiten");
+          this.http.put("http://localhost:3000/updatelanguage", this.currentlanguage).subscribe(function(res) {
+            this.currentlanguage = res;
+          }.bind(this));
+          
+          alert("Language updated.");
+          this.router.navigate(['/languages']);
         }
       }
       else

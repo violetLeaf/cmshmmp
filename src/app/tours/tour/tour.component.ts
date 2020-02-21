@@ -17,6 +17,10 @@ export class TourComponent implements OnInit {
   currentTour: TourModel;
   currentStations: StationModel[];
   allStations: StationModel[] = null;
+
+  // selectedStations: StationModel[] = null;
+  // notselectedStations: StationModel[] = null;
+
   languages: LanguageModel[];
   zwtableinfos: any;
   temps: any;
@@ -56,6 +60,25 @@ export class TourComponent implements OnInit {
       return null;
   }
 
+  // public get formattedStations(){
+  //   if (this.allStations != null && this.currentStations == null){
+  //     for(var i = 0; i < this.allStations.length; i++){
+  //       for(var ii = 0; ii < this.currentStations.length; ii++){
+  //         if (this.allStations[i].id == this.currentStations[i].id)
+  //           this.selectedStations.push(this.allStations[i]);
+  //         else
+  //           this.notselectedStations.push(this.allStations[i]);
+  //       }
+  //     }
+  //     console.log("sel and not sel");
+  //     return this.selectedStations;
+  //   }
+  //   else if (this.currentStations == null)
+  //     return this.allStations;
+  //   else
+  //     return null;
+  // }
+
   dateformated(){
     let pipe = new DatePipe('en-US');
 
@@ -88,9 +111,17 @@ export class TourComponent implements OnInit {
 
     this.currentStations.splice(0, this.currentStations.length);
 
+    // doesnt work
     for (var i = 0; i < stationsclose.length; i++){
-      if ( stationsclose[i].className == "selected"){
-        this.currentStations.push(this.allStations[stationsclose[i].id]);
+      if (stationsclose[i].className == "selected"){
+        for(var ii = 0; ii < this.allStations.length; ii++){
+          console.log("all stations: " + this.allStations[ii].id + " current station: " + this.currentStations[i].id);
+          if(+stationsclose[i].id == this.allStations[ii].id){
+            this.currentStations.push(this.allStations[ii]);
+            console.log("in if");
+          }
+        }
+        console.log(this.currentStations.length);
       }
     }
 

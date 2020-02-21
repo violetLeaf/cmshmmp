@@ -2,9 +2,9 @@
 <div>
     <div class="toursitem" *ngFor="let a of sortedAreas;" >
         <p class="name">
-            <input type="button" id="{{ a.id }}" (click)="move('up', a.position)">
+            <input type="button" id="{{ a.id }}" (click)="move('up', a)">
             <span (click)="onAreaClick(a)">{{ a.title }}</span>
-            <input type="button" id="{{ a.id }}" (click)="move('down', a.position)">
+            <input type="button" id="{{ a.id }}" (click)="move('down', a)">
         </p>
     </div>
     <span (click)="onAreaClick(standardArea)" class="newtourplus"><img src="../../assets/icons/plussymbol_leer.png" alt="+"></span>
