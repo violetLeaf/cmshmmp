@@ -172,12 +172,13 @@ export class StationComponent implements OnInit {
   }
 
   deleteMedia(id:number){
+    console.log(id);
     if(confirm("Do you want to delete?")){
       const httpOpt = {
         headers: new HttpHeaders({ 'Content-Type': 'application/json' }), body: {"table" : "media", "id" : id}
       };
       this.http.delete("http://localhost:3000/delete", httpOpt).subscribe(function(res){
-        console.log("Media deleted! " + res);
+        console.log(res);
       }.bind(this));
 
       console.log("Delete Media.");
