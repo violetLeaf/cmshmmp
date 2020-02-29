@@ -161,17 +161,15 @@ export class TourComponent implements OnInit {
             id = res.insertId;
 
             for(var i = 0; i < this.currentStations.length; i++){
-              var currstation = this.currentStations[i];
-
-              this.http.get<MediaModel[]>("http://localhost:3000/mediasforstation/" + currstation.id).subscribe((res) => {
+              // ignorieren, funktioniert
+              this.http.get<MediaModel[]>("http://localhost:3000/mediasforstation/" + this.currentStations[i].id).subscribe((res) => {
                 medias = res;
 
-                console.log(res.headers);
-                console.log(currstation);
                 for (var j = 0; j < medias.length; j++){
                   this.http.post("http://localhost:3000/posttourstations",
-                  {"tour_id": id, "station_id": currstation.id, "media_id": medias[j].id, "ordernumber": (i*j)}).subscribe(function(res) {
-                    //console.log(res);
+                  // TODO: API anpassen; dass Station_ID aus der Datenbank geholt wird, bevor ZW-Eintrag erfolgt
+                  {"tour_id": id,  "media_id": medias[j].id, "ordernumber": (i*j)}).subscribe(function(res) {
+                    console.log(res);
                   }.bind(this));
                 }
               });
