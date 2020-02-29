@@ -12,6 +12,7 @@ import { AreasComponent } from './areas/areas.component';
 import { AreaComponent } from './areas/area/area.component';
 import { LanguagesComponent } from './languages/languages.component';
 import { LanguageComponent } from './languages/language/language.component';
+import { MediaspaceComponent } from './mediaspace/mediaspace.component';
 
 
 const routes: Routes = [
@@ -26,6 +27,7 @@ const routes: Routes = [
   {path: 'areas/area', component: AreaComponent},
   {path: 'languages', component: LanguagesComponent},
   {path: 'languages/language', component: LanguageComponent},
+  {path: 'mediaspace', component: MediaspaceComponent},
   {path: '**', component: NotfoundpageComponent}
 ];
 

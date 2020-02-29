@@ -18,6 +18,7 @@ import { AreasComponent } from './areas/areas.component';
 import { AreaComponent } from './areas/area/area.component';
 import { LanguagesComponent } from './languages/languages.component';
 import { LanguageComponent } from './languages/language/language.component';
+import { MediaspaceComponent } from './mediaspace/mediaspace.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { LanguageComponent } from './languages/language/language.component';
     AreasComponent,
     AreaComponent,
     LanguagesComponent,
-    LanguageComponent
+    LanguageComponent,
+    MediaspaceComponent
   ],
   imports: [
     BrowserModule,

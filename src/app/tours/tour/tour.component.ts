@@ -7,6 +7,7 @@ import StationModel from 'src/app/shared/station.model';
 import { TourservicesService } from 'src/app/shared/services/tourservices.service';
 import { ModalService } from 'src/app/_modal';
 import LanguageModel from 'src/app/shared/language.model';
+import MediaModel from 'src/app/shared/media.model';
 
 @Component({
   selector: 'app-tour',
@@ -37,10 +38,15 @@ export class TourComponent implements OnInit {
     this.http.get<StationModel[]>("http://localhost:3000/stationsfortour/" + 
         this.currentTour.id).subscribe((res) => {
         this.currentStations = res;
+        console.log(this.currentStations);
     });
 
     this.http.get<StationModel[]>("http://localhost:3000/stations").subscribe((res) => {
       this.allStations = res;
+
+      this.allStations.forEach(station => {
+        station.selected = this.currentStations.includes(station);
+      });
     });
 
     this.http.get<LanguageModel[]>("http://localhost:3000/languages").subscribe((res) => {
@@ -50,8 +56,7 @@ export class TourComponent implements OnInit {
   // this.currentStations = tourService.getallStationsforTour(this.currentTour.id);
 }
 
-  ngOnInit() {
-  }
+  ngOnInit() {  }
 
   public get sortedStations(){
     if (this.currentStations != null)
@@ -93,66 +98,28 @@ export class TourComponent implements OnInit {
 
   openmodal(){
     this.modalService.open("ov_stations");
-
-    let output = document.getElementById("allstationsdiv");
-    let dealtwith = [];
-
-    if (output.childElementCount == 0){
-      for (var i = 0; i < this.allStations.length; i++){
-        if (this.currentStations.length == 0)
-          output.innerHTML += "<p id='" + this.allStations[i].id + "' class='notselected' (click)='onstationclick(" + this.allStations[i].id + ")'>" + this.allStations[i].name + "</p>";
-        else {
-          // noch weiter testen
-          for (var j = 0; j < this.currentStations.length; j++){
-            if (this.currentStations[j].id == this.allStations[i].id){
-              output.innerHTML += "<p id='" + this.allStations[i].id + "' class='selected' (click)='onstationclick(" + this.allStations[i].id + ")'>" + this.allStations[i].name + "</p>";
-              dealtwith.push(this.allStations[i].id);
-              // console.log("selected: " + this.allStations[i].id + " and dealt with: " + dealtwith[i]);
-            } // && this.allStations[i].id != dealtwith[i]
-            else if (this.currentStations[j].id != this.allStations[i].id){
-              output.innerHTML += "<p id='" + this.allStations[i].id + "' class='notselected' (click)='onstationclick(" + this.allStations[i].id + ")'>" + this.allStations[i].name + "</p>";
-              dealtwith.push(this.allStations[i].id);
-              // console.log("notselected: " + this.allStations[i].id + " and dealt with: " + dealtwith[i]);
-            }
-            console.log(dealtwith);
-            console.log(this.allStations[i].id);
-          }
-        }
-      }
-    }
   }
 
   closemodal(){
-    let stationsclose = <HTMLCollection>document.getElementById("allstationsdiv").children;
-
     this.currentStations.splice(0, this.currentStations.length);
 
-    // doesnt work
-    for (var i = 0; i < stationsclose.length; i++){
-      if (stationsclose[i].className == "selected"){
-        for(var ii = 0; ii < this.allStations.length; ii++){
-          console.log("all stations: " + this.allStations[ii].id + " current station: " + this.currentStations[i].id);
-          if(+stationsclose[i].id == this.allStations[ii].id){
-            this.currentStations.push(this.allStations[ii]);
-            console.log("in if");
-          }
-        }
-        console.log(this.currentStations.length);
+    this.allStations.forEach(station => {
+      if (station.selected){
+        this.currentStations.push(station);
       }
-    }
+    });
 
+    console.log(this.currentStations);
     this.modalService.close("ov_stations");
   }
 
-  onstationclick(id){
-    console.log("hi");
-    var station:HTMLElement = (<HTMLElement>document.getElementById(id));
-    if (station.className == "selected"){
-      station.className = "notselected";
-    }
-    else if (station.className == "notselected"){
-      station.className = "selected";
-    }
+  // IsSelected(station){
+  //   return this.currentStations.includes(station);
+  // }
+
+  onstationclick(station){
+    station.selected = !station.selected;
+    console.log(station);
   }
   
   move(direction:string, pos:number){
@@ -181,22 +148,33 @@ export class TourComponent implements OnInit {
       if(this.currentTour.title != "" && this.currentTour.title != null && this.currentTour.date != undefined && this.currentTour.reversible != undefined){
 
         var id:number;
+        var medias:MediaModel[];
 
         if (this.currentTour.id == -1){
           // {"title": this.currentTour.title, "reversible": this.currentTour.reversible, "template_id": this.currentTour.template_id, "guide": this.currentTour.guide, "date": this.currentTour.date}
           this.http.post("http://localhost:3000/posttour",
-          {"title": this.currentTour.title, "reversible": this.currentTour.reversible, "template_id": this.currentTour.template_id, "guide": this.currentTour.guide, "date": this.currentTour.date})
-          .subscribe(function(res) {
+            {"title": this.currentTour.title, "reversible": this.currentTour.reversible, "template_id": this.currentTour.template_id, "guide": this.currentTour.guide, "date": this.currentTour.date})
+            .subscribe(function(res) {
+
             this.currentTour=res;
 
             id = res.insertId;
 
-            // hier stimmt noch etwas nicht!
             for(var i = 0; i < this.currentStations.length; i++){
-              this.http.post("http://localhost:3000/posttourstations",
-              {"tour_id": id, "station_id": this.currentStations[i].id, "media_id": 53, "ordernumber": (Math.random() * 1000000)}).subscribe(function(res) {
-                console.log(res);
-              }.bind(this));
+              var currstation = this.currentStations[i];
+
+              this.http.get<MediaModel[]>("http://localhost:3000/mediasforstation/" + currstation.id).subscribe((res) => {
+                medias = res;
+
+                console.log(res.headers);
+                console.log(currstation);
+                for (var j = 0; j < medias.length; j++){
+                  this.http.post("http://localhost:3000/posttourstations",
+                  {"tour_id": id, "station_id": currstation.id, "media_id": medias[j].id, "ordernumber": (i*j)}).subscribe(function(res) {
+                    //console.log(res);
+                  }.bind(this));
+                }
+              });
             }
           }.bind(this));
           

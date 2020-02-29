@@ -3,4 +3,5 @@ export default interface StationModel {
     name: string;
     area_id: number;
     ordernumber: number;
+    selected?: boolean;
   }

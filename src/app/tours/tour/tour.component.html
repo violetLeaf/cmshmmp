@@ -32,7 +32,7 @@
 
                     <jw-modal id="ov_stations">
                         <div id="allstationsdiv">
-                            <!-- <p *ngFor="let st of allStations" id="{{ st.id }}" class="notselected" (click)="onstationclick(st.id)">{{ st.name }}</p> -->
+                            <p *ngFor="let st of allStations" id="{{ st.id }}" [ngClass]="{'selected': st.selected, 'notselected': !st.selected}" (click)="onstationclick(st)">{{ st.name }}</p>
                         </div>
                         <span (click)="closemodal()"><img src="../../../../assets/icons/x.png" alt=""></span>
                     </jw-modal>
