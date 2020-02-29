@@ -91,17 +91,33 @@ export class TourComponent implements OnInit {
     this.router.navigate(['mediaselect'], {state: {data: {station, tour}}});
   }
 
-  addStationtoTour(){
+  openmodal(){
     this.modalService.open("ov_stations");
 
-    let selectedstations = <HTMLCollection>document.getElementById("selstations").children;
-    let stations = <HTMLCollection>document.getElementById("allstationsdiv").children;
-    for (var i = 0; i < stations.length; i++){
-      if (stations[i].id == selectedstations[i].id){
-        stations[i].className = "selected";
-      }
-      else{
-        stations[i].className = "notselected";
+    let output = document.getElementById("allstationsdiv");
+    let dealtwith = [];
+
+    if (output.childElementCount == 0){
+      for (var i = 0; i < this.allStations.length; i++){
+        if (this.currentStations.length == 0)
+          output.innerHTML += "<p id='" + this.allStations[i].id + "' class='notselected' (click)='onstationclick(" + this.allStations[i].id + ")'>" + this.allStations[i].name + "</p>";
+        else {
+          // noch weiter testen
+          for (var j = 0; j < this.currentStations.length; j++){
+            if (this.currentStations[j].id == this.allStations[i].id){
+              output.innerHTML += "<p id='" + this.allStations[i].id + "' class='selected' (click)='onstationclick(" + this.allStations[i].id + ")'>" + this.allStations[i].name + "</p>";
+              dealtwith.push(this.allStations[i].id);
+              // console.log("selected: " + this.allStations[i].id + " and dealt with: " + dealtwith[i]);
+            } // && this.allStations[i].id != dealtwith[i]
+            else if (this.currentStations[j].id != this.allStations[i].id){
+              output.innerHTML += "<p id='" + this.allStations[i].id + "' class='notselected' (click)='onstationclick(" + this.allStations[i].id + ")'>" + this.allStations[i].name + "</p>";
+              dealtwith.push(this.allStations[i].id);
+              // console.log("notselected: " + this.allStations[i].id + " and dealt with: " + dealtwith[i]);
+            }
+            console.log(dealtwith);
+            console.log(this.allStations[i].id);
+          }
+        }
       }
     }
   }
@@ -129,6 +145,7 @@ export class TourComponent implements OnInit {
   }
 
   onstationclick(id){
+    console.log("hi");
     var station:HTMLElement = (<HTMLElement>document.getElementById(id));
     if (station.className == "selected"){
       station.className = "notselected";
@@ -158,12 +175,6 @@ export class TourComponent implements OnInit {
         template_id: null
       };
 
-      this.zwtableinfos = {
-        station_id: 2,
-        media_id: 2,
-        ordernumber: (this.currentTour.id + (Math.random() * 1000000))
-      };
-
       // console.log(this.currentTour);
       // console.log((<HTMLInputElement>document.getElementById("reversible")).checked);
 
@@ -173,7 +184,8 @@ export class TourComponent implements OnInit {
 
         if (this.currentTour.id == -1){
           // {"title": this.currentTour.title, "reversible": this.currentTour.reversible, "template_id": this.currentTour.template_id, "guide": this.currentTour.guide, "date": this.currentTour.date}
-          this.http.post("http://localhost:3000/posttour", {"title": this.currentTour.title, "reversible": this.currentTour.reversible, "template_id": this.currentTour.template_id, "guide": this.currentTour.guide, "date": this.currentTour.date})
+          this.http.post("http://localhost:3000/posttour",
+          {"title": this.currentTour.title, "reversible": this.currentTour.reversible, "template_id": this.currentTour.template_id, "guide": this.currentTour.guide, "date": this.currentTour.date})
           .subscribe(function(res) {
             this.currentTour=res;
 
@@ -181,14 +193,14 @@ export class TourComponent implements OnInit {
 
             // hier stimmt noch etwas nicht!
             for(var i = 0; i < this.currentStations.length; i++){
-              this.http.post("http://localhost:3000/posttourstations", {"tour_id": id, "station_id": this.currentStations[i].id, "media_id": 53, "ordernumber": (Math.random() * 1000000)}).subscribe(function(res) {
+              this.http.post("http://localhost:3000/posttourstations",
+              {"tour_id": id, "station_id": this.currentStations[i].id, "media_id": 53, "ordernumber": (Math.random() * 1000000)}).subscribe(function(res) {
                 console.log(res);
               }.bind(this));
             }
           }.bind(this));
           
           alert("New Tour created.");
-
           this.router.navigate(['']);
         }
         else if (this.currentTour.id != -1){

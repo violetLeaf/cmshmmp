@@ -67,19 +67,22 @@ export class AreaComponent implements OnInit {
   }
 
   delete(){
-    if (!isNaN(this.currentarea.id) && this.currentarea.id != -1){
-      const httpOpt = {
-        headers: new HttpHeaders({ 'Content-Type': 'application/json' }), body: {"table" : "area", "id" : this.currentarea.id}
-      };
-      this.http.delete("http://localhost:3000/delete", httpOpt).subscribe(function(res){
-        this.currentarea = res;
-      }.bind(this));
-      this.router.navigate(['/areas']);
-    }
-    else if (this.currentarea.id == -1)
-      this.router.navigate(['/areas']);
-    else{
-      console.log("An error occured when trying to delete.");
+    if (confirm("Are you sure you want to delete?")){
+      if (!isNaN(this.currentarea.id) && this.currentarea.id != -1){
+        const httpOpt = {
+          headers: new HttpHeaders({ 'Content-Type': 'application/json' }), body: {"table" : "area", "id" : this.currentarea.id}
+        };
+        this.http.delete("http://localhost:3000/delete", httpOpt).subscribe(function(res){
+          this.currentarea = res;
+        }.bind(this));
+        alert("Delete successful.");
+        this.router.navigate(['/areas']);
+      }
+      else if (this.currentarea.id == -1)
+        this.router.navigate(['/areas']);
+      else{
+        console.log("An error occured when trying to delete.");
+      }
     }
   }
 }

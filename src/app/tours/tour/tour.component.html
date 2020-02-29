@@ -32,12 +32,12 @@
 
                     <jw-modal id="ov_stations">
                         <div id="allstationsdiv">
-                            <p *ngFor="let st of allStations" id="{{ st.id }}" class="notselected" (click)="onstationclick(st.id)">{{ st.name }}</p>
+                            <!-- <p *ngFor="let st of allStations" id="{{ st.id }}" class="notselected" (click)="onstationclick(st.id)">{{ st.name }}</p> -->
                         </div>
                         <span (click)="closemodal()"><img src="../../../../assets/icons/x.png" alt=""></span>
                     </jw-modal>
 
-                    <span (click)="addStationtoTour()" class="stationsplus"><img src="../../../assets/icons/plussymbol_leer.png" alt="+"></span>
+                    <span (click)="openmodal()" class="stationsplus"><img src="../../../assets/icons/plussymbol_leer.png" alt="+"></span>
                 </div>
             </div>
         </div>

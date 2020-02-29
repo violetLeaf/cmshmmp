@@ -162,6 +162,7 @@ export class StationComponent implements OnInit {
       this.http.delete("http://localhost:3000/delete", httpOpt).subscribe(function(res){
         this.currentTour = res;
       }.bind(this));
+      alert("Delete successful.")
       this.router.navigate(['/stations']);
     }
     else if (this.currentstation.id == -1)

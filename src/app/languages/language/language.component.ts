@@ -63,19 +63,22 @@ export class LanguageComponent implements OnInit {
   }
 
   delete(){
-    if (!isNaN(this.currentlanguage.id) && this.currentlanguage.id != -1){
-      const httpOpt = {
-        headers: new HttpHeaders({ 'Content-Type': 'application/json' }), body: {"table" : "language", "id" : this.currentlanguage.id}
-      };
-      this.http.delete("http://localhost:3000/delete", httpOpt).subscribe(function(res){
-        this.currentarea = res;
-      }.bind(this));
-      this.router.navigate(['/languages']);
-    }
-    else if (this.currentlanguage.id == -1)
-      this.router.navigate(['/languages']);
-    else{
-      console.log("An error occured when trying to delete.");
+    if (confirm("Are you sure you want to delete?")){
+      if (!isNaN(this.currentlanguage.id) && this.currentlanguage.id != -1){
+        const httpOpt = {
+          headers: new HttpHeaders({ 'Content-Type': 'application/json' }), body: {"table" : "language", "id" : this.currentlanguage.id}
+        };
+        this.http.delete("http://localhost:3000/delete", httpOpt).subscribe(function(res){
+          this.currentarea = res;
+        }.bind(this));
+        alert("Delete successful.");
+        this.router.navigate(['/languages']);
+      }
+      else if (this.currentlanguage.id == -1)
+        this.router.navigate(['/languages']);
+      else{
+        console.log("An error occured when trying to delete.");
+      }
     }
   }
 }
