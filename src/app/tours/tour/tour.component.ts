@@ -9,6 +9,7 @@ import { ModalService } from 'src/app/_modal';
 import LanguageModel from 'src/app/shared/language.model';
 import MediaModel from 'src/app/shared/media.model';
 import { environment } from 'src/environments/environment';
+import TemplateModel from 'src/app/shared/template.model';
 
 @Component({
   selector: 'app-tour',
@@ -26,6 +27,7 @@ export class TourComponent implements OnInit {
   allavailableMedia: MediaModel[];
 
   languages: LanguageModel[];
+  templates: TemplateModel[];
 
   constructor(private router: Router, private http: HttpClient, private tourService: TourservicesService, private modalService: ModalService) { 
     let stateData = this.router.getCurrentNavigation().extras.state.data;
@@ -43,9 +45,14 @@ export class TourComponent implements OnInit {
       this.http.get<StationModel[]>(environment.localurl + "stations").subscribe((res) => {
         this.allStations = res;
 
-        this.allStations.forEach(station => {
-          station.selected = this.currentStations.includes(station);
-        });
+        for(let i = 0; i < this.allStations.length; i++){
+          for(let j = 0; j < this.currentStations.length; i++){
+            if(this.allStations[i].id == this.currentStations[j].id)
+              this.allStations[i].selected = true;
+            else if (this.allStations[i].id != this.currentStations[j].id && !this.allStations[i].selected)
+              this.allStations[i].selected = false;
+          }
+        }
 
         console.log(this.currentStations);
         console.log(this.allStations);
@@ -56,6 +63,9 @@ export class TourComponent implements OnInit {
       this.languages = res;
     });
 
+    this.http.get<TemplateModel[]>(environment.localurl + "templates").subscribe((res) => {
+      this.templates = res;
+    });
   }
 
   ngOnInit() {  }
@@ -174,6 +184,16 @@ export class TourComponent implements OnInit {
     }
   }
 
+  ontemplateclick(template:TemplateModel){
+    if (this.currentTour.template_id != template.id){
+      this.currentTour.template_id = template.id;
+
+      this.http.get<StationModel[]>(environment.localurl + "stationsfortemplate/" + template.id).subscribe((res) => {
+        this.currentStations = res;
+      });
+    }
+  }
+
   save(){
     try{
       var e = (<HTMLSelectElement>document.getElementById("language"));
@@ -183,7 +203,7 @@ export class TourComponent implements OnInit {
         date: new Date((<HTMLInputElement>document.getElementById("date")).value),
         guide: (<HTMLInputElement>document.getElementById("guide")).value,
         reversible: (<HTMLInputElement>document.getElementById("reversible")).checked,
-        template_id: null,
+        template_id: this.currentTour.template_id,
         language_id: +e.options[e.selectedIndex].id
       };
 
@@ -265,6 +285,8 @@ export class TourComponent implements OnInit {
       this.http.delete(environment.localurl + "delete", httpOpt).subscribe(function(res){
         this.currentTour = res;
       }.bind(this));
+
+      alert("Template deleted.");
       this.router.navigate(['']);
     }
     else{

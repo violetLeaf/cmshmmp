@@ -66,6 +66,6 @@
         </div>
     </div>
     <div class="templates">
-        <app-templates></app-templates>	
+        <p *ngFor="let t of templates" id="{{t.id}}" (click)="ontemplateclick(t)">{{ t.title }}</p>
 	</div>	
 </div>

@@ -22,10 +22,7 @@ export class ToursComponent implements OnInit {
   constructor(private router: Router, private http: HttpClient, private tourService: TourservicesService) {
     this.http.get<TourModel[]>(environment.localurl + "tours").subscribe(function(res) {
        this.toursarray = res;
-       console.log(this.toursarray);
     }.bind(this));
-
-    // this.toursarray = tourService.getallTours();
   }
 
   ngOnInit() {
@@ -45,9 +42,7 @@ export class ToursComponent implements OnInit {
     let http2 = this.http;
 
     this.http.delete(environment.localurl + "deletetoursapp").subscribe(function(res){
-      console.log(alltours);
       alltours.forEach(tour => {
-        console.log(tour);
         // create the zip-file
         http2.get(environment.localurl + "tourapp/" + tour.id).subscribe(function(res){
           console.log(res);

@@ -174,3 +174,26 @@ h1{
 .mediabox p {
     color: $darkgray;
 }
+
+// -----------------------------------------------------------
+// from templates
+
+.templates{
+    position: fixed;
+    font-weight: bold;
+    left: 84.5%;
+    top: 80px;
+    background-color: white;
+    width: 190px;
+    border-radius: 20px;
+    height: 620px;
+}
+.templates p{
+    text-align: center;
+}
+.templateswrapper {
+    margin-top: 40px;
+}
+.templateplus{
+    text-align: center;
+}
