@@ -112,6 +112,10 @@ export class TourComponent implements OnInit {
     });
   }
 
+  closemodal_media(){
+    this.modalService.close("ov_medias");
+  }
+
   public get sortedMedia(){
     if (this.allavailableMedia != null){
 
@@ -121,7 +125,10 @@ export class TourComponent implements OnInit {
       return null;
   }
   
-  // noch testen
+  onmediaclick(media){
+    media.active = !media.active;
+  }
+
   move(direction:string, station:StationModel){
     station.id = (station.id != undefined ? station.id : station.station_id);
     if ((direction == "up" && station.ordernumber != 0) || (direction == "down" && station.ordernumber < this.currentStations.length - 1)){
@@ -160,11 +167,11 @@ export class TourComponent implements OnInit {
 
             id = res.insertId;
 
-            for(var i = 0; i < this.currentStations.length; i++){
+            for(let i = 0; i < this.currentStations.length; i++){
               this.http.get("http://localhost:3000/mediasforstation/" + this.currentStations[i].id).subscribe((res) => {
                 medias = res;
 
-                for (var j = 0; j < medias.length; j++){
+                for (let j = 0; j < medias.length; j++){
                   this.http.post("http://localhost:3000/posttourstations",
                   {"tour_id": id,  "media_id": medias[j].id, "ordernumber": this.currentStations[i].ordernumber}).subscribe(function(res) {
                     console.log(res);
