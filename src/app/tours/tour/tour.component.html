@@ -34,7 +34,7 @@
                     <div id="selstations" class="station">
                         <p *ngFor="let s of sortedStations">
                             <input type="button" id="{{ s.id }}" (click)="move('up', s)">
-                            <span (click)="openmodal_media(s.id)" id="{{ s.id }}">{{ s.name }}</span>
+                            <span (click)="openmodal_media(s)" id="{{ s.id }}">{{ s.name }}</span>
                             <input type="button" id="{{ s.id }}" (click)="move('down', s)">
                         </p>
                     </div>

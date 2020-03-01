@@ -16,8 +16,10 @@ import MediaModel from 'src/app/shared/media.model';
 })
 export class TourComponent implements OnInit {
   currentTour: TourModel;
+
   currentStations: StationModel[];
   allStations: StationModel[] = null;
+  openStation: StationModel;
   
   currentMedias: MediaModel[] = null;
   allavailableMedia: MediaModel[];
@@ -88,37 +90,61 @@ export class TourComponent implements OnInit {
       }
     });
 
-    console.log(this.currentStations);
     this.modalService.close("ov_stations");
   }
 
-  IsSelected(station){
-    return this.currentStations.includes(station);
-  }
+  // IsSelected(station){
+  //   return this.currentStations.includes(station);
+  // }
 
   onstationclick(station){
     station.selected = !station.selected;
   }
 
-  openmodal_media(stationid){
-    this.modalService.open("ov_medias");
+  openmodal_media(station){
+    if (this.currentTour.id != -1){
+      this.modalService.open("ov_medias");
+      this.openStation = station;
+      this.http.get<MediaModel[]>("http://localhost:3000/mediasforstationsfortour/" + station.id + "/" + this.currentTour.id).subscribe((res) => {
+        this.currentMedias = res;       
 
-    this.http.get<MediaModel[]>("http://localhost:3000/mediasforstationsfortour/" + stationid + "/" + this.currentTour.id).subscribe((res) => {
-      this.currentMedias = res;       
-
-      this.http.get<MediaModel[]>("http://localhost:3000/mediasforstation/" + stationid).subscribe((res) => {
-        this.allavailableMedia = res;
+        this.http.get<MediaModel[]>("http://localhost:3000/mediasforstation/" + station.id).subscribe((res) => {
+          this.allavailableMedia = res;
+        });
       });
-    });
+    }
+    else
+      alert("Please save Tour before trying to select Medias.");
   }
 
   closemodal_media(){
+    this.currentMedias.splice(0, this.currentMedias.length);
+
+    this.allavailableMedia.forEach(media => {
+      if (media.active){
+        this.currentMedias.push(media);
+      }
+    });
+
+    const httpOpt = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' }), body: {"table" : "tourzwmedia", "id" : this.openStation.id}
+    };
+    this.http.delete("http://localhost:3000/delete", httpOpt).subscribe(function(res){
+      for (let j = 0; j < this.currentMedias.length; j++){
+        this.http.post("http://localhost:3000/posttourstations",
+          {"tour_id": this.currentTour.id,  "media_id": this.currentMedias[j].id, "ordernumber": this.openStation.ordernumber}
+          ).subscribe(function(res) {
+            console.log(res);
+        }.bind(this));
+      }
+      this.openStation = null;
+    }.bind(this));
+
     this.modalService.close("ov_medias");
   }
 
   public get sortedMedia(){
     if (this.allavailableMedia != null){
-
       return this.allavailableMedia.sort((a, b)=> {return a.id - b.id});
     }
     else
