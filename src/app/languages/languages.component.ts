@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import LanguageModel from '../shared/language.model';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-languages',
@@ -17,7 +18,7 @@ export class LanguagesComponent implements OnInit {
 
   constructor(private router: Router, private http: HttpClient) { 
     
-    this.http.get<[]>("http://localhost:3000/languages").subscribe((res) => {
+    this.http.get<[]>(environment.localurl + "languages").subscribe((res) => {
         this.languages = res;
         console.log(this.languages);
     });

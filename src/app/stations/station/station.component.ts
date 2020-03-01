@@ -6,6 +6,7 @@ import MediaModel from 'src/app/shared/media.model';
 import AreaModel from 'src/app/shared/area.model';
 import { ModalService } from 'src/app/_modal';
 import LanguageModel from 'src/app/shared/language.model';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-station',
@@ -29,15 +30,15 @@ export class StationComponent implements OnInit {
     }
 
     if (this.currentstation.id != -1){
-      this.http.get<MediaModel[]>("http://localhost:3000/mediasforstation/" + this.currentstation.id).subscribe((res) => {
+      this.http.get<MediaModel[]>(environment.localurl + "mediasforstation/" + this.currentstation.id).subscribe((res) => {
         this.media = res;
       });
     }
 
-    this.http.get<AreaModel[]>("http://localhost:3000/areas").subscribe((res) => {
+    this.http.get<AreaModel[]>(environment.localurl + "areas").subscribe((res) => {
       this.areas = res;
     });
-    this.http.get<LanguageModel[]>("http://localhost:3000/languages").subscribe((res) => {
+    this.http.get<LanguageModel[]>(environment.localurl + "languages").subscribe((res) => {
       this.languages = res;
     });
    }
@@ -80,7 +81,7 @@ export class StationComponent implements OnInit {
       var e = (<HTMLSelectElement>document.getElementById("language"));
       if (+e.options[e.selectedIndex].id != -1){
         if (this.currentstation.id != -1){
-            this.http.post("http://localhost:3000/posttext", {"text": text, "language_id": +e.options[e.selectedIndex].id, "station_id": this.currentstation.id}).subscribe(function(res){
+            this.http.post(environment.localurl + "posttext", {"text": text, "language_id": +e.options[e.selectedIndex].id, "station_id": this.currentstation.id}).subscribe(function(res){
               console.log(res);
             }.bind(this));
         }
@@ -119,14 +120,14 @@ export class StationComponent implements OnInit {
       if(this.currentstation.name != "" && this.currentstation.name != null){
         if (this.currentstation.id == -1){
           console.log(this.currentstation.name + this.currentstation.area_id);
-          this.http.post("http://localhost:3000/poststation", {"name": this.currentstation.name, "area_id": this.currentstation.area_id})
+          this.http.post(environment.localurl + "poststation", {"name": this.currentstation.name, "area_id": this.currentstation.area_id})
           .subscribe(function(res) {
             console.log(res);
             this.currentstation = res;
             id = res.insertId;
 
             this.tosavemedias.forEach(e => {
-              this.http.post("http://localhost:3000/posttext", {"text": e.text, "language_id": e.language_id, "station_id": id}).subscribe(function(res){
+              this.http.post(environment.localurl + "posttext", {"text": e.text, "language_id": e.language_id, "station_id": id}).subscribe(function(res){
                 console.log(res);
               }.bind(this));
             });
@@ -137,7 +138,7 @@ export class StationComponent implements OnInit {
           this.router.navigate(['/stations']);
         }
         else if (this.currentstation.id != -1){
-          this.http.put("http://localhost:3000/updatestation", this.currentstation).subscribe(function(res) {
+          this.http.put(environment.localurl + "updatestation", this.currentstation).subscribe(function(res) {
             console.log(res);
             this.currentarea = res;
           }.bind(this));
@@ -159,7 +160,7 @@ export class StationComponent implements OnInit {
       const httpOpt = {
         headers: new HttpHeaders({ 'Content-Type': 'application/json' }), body: {"table" : "station", "id" : this.currentstation.id}
       };
-      this.http.delete("http://localhost:3000/delete", httpOpt).subscribe(function(res){
+      this.http.delete(environment.localurl + "delete", httpOpt).subscribe(function(res){
         this.currentTour = res;
       }.bind(this));
       alert("Delete successful.")
@@ -178,7 +179,7 @@ export class StationComponent implements OnInit {
       const httpOpt = {
         headers: new HttpHeaders({ 'Content-Type': 'application/json' }), body: {"table" : "media", "id" : id}
       };
-      this.http.delete("http://localhost:3000/delete", httpOpt).subscribe(function(res){
+      this.http.delete(environment.localurl + "delete", httpOpt).subscribe(function(res){
         console.log(res);
       }.bind(this));
 

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import LanguageModel from 'src/app/shared/language.model';
 import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-language',
@@ -36,7 +37,7 @@ export class LanguageComponent implements OnInit {
       if( this.currentlanguage.name != "" && this.currentlanguage.name != null){
         if (this.currentlanguage.id == -1){
           console.log(this.currentlanguage.name);
-          this.http.post("http://localhost:3000/postlanguage", {"name": this.currentlanguage.name})
+          this.http.post(environment.localurl + "postlanguage", {"name": this.currentlanguage.name})
           .subscribe(function(res) {
             console.log(res);
             this.currentlanguage = res;
@@ -46,7 +47,7 @@ export class LanguageComponent implements OnInit {
           this.router.navigate(['/languages']);
         }
         else if (this.currentlanguage.id != -1){
-          this.http.put("http://localhost:3000/updatelanguage", this.currentlanguage).subscribe(function(res) {
+          this.http.put(environment.localurl + "updatelanguage", this.currentlanguage).subscribe(function(res) {
             this.currentlanguage = res;
           }.bind(this));
           
@@ -68,7 +69,7 @@ export class LanguageComponent implements OnInit {
         const httpOpt = {
           headers: new HttpHeaders({ 'Content-Type': 'application/json' }), body: {"table" : "language", "id" : this.currentlanguage.id}
         };
-        this.http.delete("http://localhost:3000/delete", httpOpt).subscribe(function(res){
+        this.http.delete(environment.localurl + "delete", httpOpt).subscribe(function(res){
           this.currentarea = res;
         }.bind(this));
         alert("Delete successful.");

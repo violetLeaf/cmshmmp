@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import StationModel from 'src/app/shared/station.model';
 import MediaModel from 'src/app/shared/media.model';
 import LanguageModel from 'src/app/shared/language.model';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-template',
@@ -28,11 +29,11 @@ export class TemplateComponent implements OnInit {
     else
       this.router.navigate(['']);
 
-    this.http.get<StationModel[]>("http://localhost:3000/stationsfortemplate/" + 
+    this.http.get<StationModel[]>(environment.localurl + "stationsfortemplate/" + 
       this.currentTemplate.id).subscribe((res) => {
       this.currentStations = res;
 
-      this.http.get<StationModel[]>("http://localhost:3000/stations").subscribe((res) => {
+      this.http.get<StationModel[]>(environment.localurl + "stations").subscribe((res) => {
         this.allStations = res;
 
         this.allStations.forEach(station => {
@@ -44,7 +45,7 @@ export class TemplateComponent implements OnInit {
       });
     });
 
-    this.http.get<LanguageModel[]>("http://localhost:3000/languages").subscribe((res) => {
+    this.http.get<LanguageModel[]>(environment.localurl + "languages").subscribe((res) => {
       this.languages = res;
     });
   }

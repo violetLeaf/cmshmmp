@@ -3,6 +3,7 @@ import {Router} from '@angular/router';
 import StationModel from '../shared/station.model';
 import { HttpClient } from '@angular/common/http';
 import AreaModel from '../shared/area.model';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-stations',
@@ -21,11 +22,11 @@ export class StationsComponent implements OnInit {
   }
 
   constructor(private router: Router, private http: HttpClient) {
-     this.http.get<StationModel[]>("http://localhost:3000/stations").subscribe(function(res) {
+     this.http.get<StationModel[]>(environment.localurl + "stations").subscribe(function(res) {
       this.stationsarray = res;
    }.bind(this));
 
-    this.http.get<AreaModel[]>("http://localhost:3000/areas").subscribe((res) => {
+    this.http.get<AreaModel[]>(environment.localurl + "areas").subscribe((res) => {
       this.areas = res;
     });
   }

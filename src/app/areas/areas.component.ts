@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import AreaModel from '../shared/area.model';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-areas',
@@ -14,7 +15,7 @@ export class AreasComponent implements OnInit {
 
   constructor(private router: Router, private http: HttpClient) { 
     
-    this.http.get<AreaModel[]>("http://localhost:3000/areas").subscribe((res) => {
+    this.http.get<AreaModel[]>(environment.localurl + "areas").subscribe((res) => {
         this.areas = res;
         console.log(this.areas);
 
@@ -41,7 +42,7 @@ export class AreasComponent implements OnInit {
     else if (direction == "down" && area.position < this.areas.length)
       area.position += 1;
       
-    this.http.put("http://localhost:3000/updateareapos", {"direction": direction, "id": area.id, "position": area.position}).subscribe(function(res) {
+    this.http.put(environment.localurl + "updateareapos", {"direction": direction, "id": area.id, "position": area.position}).subscribe(function(res) {
       console.log(res);
     }.bind(this));
   }

@@ -3,6 +3,7 @@ import {Router} from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import TourModel from '../shared/tour.model';
 import { TourservicesService } from '../shared/services/tourservices.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-tours',
@@ -19,9 +20,9 @@ export class ToursComponent implements OnInit {
   };
 
   constructor(private router: Router, private http: HttpClient, private tourService: TourservicesService) {
-    this.http.get<TourModel[]>("http://localhost:3000/tours").subscribe(function(res) {
-       this.toursarray=res;
-      //  console.log(this.toursarray);
+    this.http.get<TourModel[]>(environment.localurl + "tours").subscribe(function(res) {
+       this.toursarray = res;
+       console.log(this.toursarray);
     }.bind(this));
 
     // this.toursarray = tourService.getallTours();
@@ -37,5 +38,21 @@ export class ToursComponent implements OnInit {
 
   public get sortedTours(){
     return this.toursarray.sort((a, b)=> {return a.id - b.id});
+  }
+
+  createZIPtours(){
+    let alltours = this.toursarray;
+    let http2 = this.http;
+
+    this.http.delete(environment.localurl + "deletetoursapp").subscribe(function(res){
+      console.log(alltours);
+      alltours.forEach(tour => {
+        console.log(tour);
+        // create the zip-file
+        http2.get(environment.localurl + "tourapp/" + tour.id).subscribe(function(res){
+          console.log(res);
+        });
+      });
+    });
   }
 }
