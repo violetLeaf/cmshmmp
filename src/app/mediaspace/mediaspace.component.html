@@ -1,5 +1,34 @@
-<p>mediaspace works!</p>
 
+
+<!-- JUST FOR TESTING - METHOD SHOULD BE CALLED WHILE LOADING THE FILE -->
+<p (click)="showImages()">mediaspace works!</p>
+
+
+<!-- IMAGE CONTAINER TO DISPLAY IMAGES -->
+<div id="ImageContainer">
+
+</div>
+
+<!-- AGAIN THE FOLLOWING TUTORIAL IS USED: https://www.freecodecamp.org/news/how-to-make-image-upload-easy-with-angular-1ed14cb2773b/ -->
+<label class="image-upload-container btn btn-bwm">
+  <span>Select Image</span>
+  <input #imageInput
+         type="file"
+         accept="image/*"
+         (change)="processFile(imageInput)"/>
+</label>
+<div *ngIf="selectedFile" class="img-preview-container">
+  <div class="img-preview{{selectedFile.status === 'fail' ? '-error' : ''}}"
+       [ngStyle]="{'background-image': 'url('+ selectedFile.src + ')'}">
+  </div>
+
+  <div *ngIf="selectedFile.pending" class="img-loading-overlay">
+    <div class="img-spinning-circle"></div>
+  </div>
+
+  <div *ngIf="selectedFile.status === 'ok'" class="alert alert-success"> Image Uploaded Succesfuly!</div>
+  <div *ngIf="selectedFile.status === 'fail'" class="alert alert-danger"> Image Upload Failed!</div>
+</div>
 <span (click)="openmodal()"><img src="../../../assets/icons/plussymbol_leer.png" alt=""></span>
 <jw-modal id="ov_mediaspace">
     <p>hi</p>

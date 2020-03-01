@@ -13,7 +13,6 @@ import { TourComponent } from './tours/tour/tour.component';
 import { NotfoundpageComponent } from './notfoundpage/notfoundpage.component';
 import { TemplatesComponent } from './templates/templates.component';
 import { TemplateComponent } from './templates/template/template.component';
-import { MediaselectComponent } from './tours/tour/mediaselect/mediaselect.component';
 import { AreasComponent } from './areas/areas.component';
 import { AreaComponent } from './areas/area/area.component';
 import { LanguagesComponent } from './languages/languages.component';
@@ -30,7 +29,6 @@ import { MediaspaceComponent } from './mediaspace/mediaspace.component';
     NotfoundpageComponent,
     TemplatesComponent,
     TemplateComponent,
-    MediaselectComponent,
     AreasComponent,
     AreaComponent,
     LanguagesComponent,

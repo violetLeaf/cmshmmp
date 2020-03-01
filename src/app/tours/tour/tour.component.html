@@ -8,12 +8,21 @@
                 <p>Date and Time</p>
                 <p>Guide</p>
                 <p>Reversible</p>
+                <p>Languages</p>
             </div>
             <div class="generalinfo">
                 <p><input id="title" type="text" value="{{ currentTour.title }}"></p>
                 <p><input id="date" type="datetime-local" value="{{ dateformated() }}"></p>
                 <p><input id="guide" type="text" value="{{ currentTour.guide }}"></p>
                 <p><input type="checkbox" id="reversible" [checked]="currentTour.reversible"></p>
+                <div class="languagebox">
+                    <select id="language">
+                        <option id="-1" selected>-- all languages --</option>
+                        <option *ngFor="let lang of languages" id="{{ lang.id }}" [selected]="lang.id == currentTour.language_id">
+                            {{ lang.name }}
+                        </option>
+                    </select>
+                </div>
 
                 <span (click)="save()"><img src="../../../assets/icons/save.png" alt="Save"></span>
                 <span (click)="delete()"><img src="../../../assets/icons/trash.png" alt="Delete"></span>
@@ -24,9 +33,9 @@
                 <div class="stationwrapper">
                     <div id="selstations" class="station">
                         <p *ngFor="let s of sortedStations">
-                            <input type="button" id="{{ s.id }}" (click)="move('up', s.ordernumber)">
-                            <span (click)="onStationClick(s , currentTour)" id="{{ s.id }}">{{ s.name }}</span>
-                            <input type="button" id="{{ s.id }}" (click)="move('down', s.ordernumber)">
+                            <input type="button" id="{{ s.id }}" (click)="move('up', s)">
+                            <span (click)="openmodal_media(s.id)" id="{{ s.id }}">{{ s.name }}</span>
+                            <input type="button" id="{{ s.id }}" (click)="move('down', s)">
                         </p>
                     </div>
 
@@ -39,6 +48,19 @@
 
                     <span (click)="openmodal()" class="stationsplus"><img src="../../../assets/icons/plussymbol_leer.png" alt="+"></span>
                 </div>
+
+                <jw-modal id="ov_medias">
+                    <div class="mediawrapper">
+                        <div class="mediabox">
+                            <p>Elements</p>
+                            <div id="medias" class="medias">
+                                <p  *ngFor="let m of sortedMedia" (click)="onmediaclick(m.id, m)" id="{{ m.id }}" [ngClass]= "allavailableMedia.active ? 'active' : 'inactive'">
+                                    {{ m.caption }} {{ m.text }}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </jw-modal>
             </div>
         </div>
     </div>

@@ -2,8 +2,10 @@
     id: number;
     title: string;
     reversible: boolean;
-    template_id?: number;
     guide?: string;
     date: Date;
+    
+    template_id?: number;
+    language_id?: number;
   }
 

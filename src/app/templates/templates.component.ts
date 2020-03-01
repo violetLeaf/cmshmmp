@@ -9,8 +9,11 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./templates.component.scss']
 })
 export class TemplatesComponent implements OnInit {
-
   templatesarray: TemplateModel[] = [];
+  standardTemplate: TemplateModel= {
+    id: -1,
+    title: "Standard Template"
+  };
 
   constructor(private router: Router, private http: HttpClient) {
     this.http.get<TemplateModel[]>("http://localhost:3000/templates").subscribe(function(res) {
@@ -28,5 +31,4 @@ export class TemplatesComponent implements OnInit {
   public get sortedTemplates(){
     return this.templatesarray.sort((a, b)=> {return a.id - b.id});
   }
-
 }

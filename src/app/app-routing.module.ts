@@ -7,7 +7,6 @@ import { TourComponent } from './tours/tour/tour.component';
 import { NotfoundpageComponent } from './notfoundpage/notfoundpage.component';
 import { TemplatesComponent } from './templates/templates.component';
 import { TemplateComponent } from './templates/template/template.component';
-import { MediaselectComponent } from './tours/tour/mediaselect/mediaselect.component';
 import { AreasComponent } from './areas/areas.component';
 import { AreaComponent } from './areas/area/area.component';
 import { LanguagesComponent } from './languages/languages.component';
@@ -22,7 +21,6 @@ const routes: Routes = [
   {path: 'stations/station', component: StationComponent},
   {path: 'templates', component: TemplatesComponent},
   {path: 'templates/template', component: TemplateComponent},
-  {path: 'mediaselect', component: MediaselectComponent},
   {path: 'areas', component: AreasComponent},
   {path: 'areas/area', component: AreaComponent},
   {path: 'languages', component: LanguagesComponent},

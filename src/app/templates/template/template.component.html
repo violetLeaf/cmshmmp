@@ -1,19 +1,50 @@
-<h1>Create / Edit Template</h1>
-
+<h1>CREATE / EDIT TOURS</h1>
 <div class="wrapper">
     <div class="templatebox">
         <div class="generalinfocaption">
-            <p>Name</p>
+            <p>Title:</p>
         </div>
         <div class="generalinfo">
             <p><input type="text" value="{{ currentTemplate.title }}"></p>
+
+            <span (click)="save()"><img src="../../../assets/icons/save.png" alt="Save"></span>
+            <span (click)="delete()"><img src="../../../assets/icons/trash.png" alt="Delete"></span>
         </div>
         
+        
         <div class="stations">
-            <div class="station" *ngFor="let t of currentTemplate.stations" (click)="onStationClick(t)">
-                <p>{{ t.name }}</p>
+            <p>Stations:</p>
+            <div class="stationwrapper">
+                <div id="selstations" class="station">
+                    <p *ngFor="let s of sortedStations">
+                        <input type="button" id="{{ s.id }}" (click)="move('up', s)">
+                        <span (click)="openmodal_media(s.id)" id="{{ s.id }}">{{ s.name }}</span>
+                        <input type="button" id="{{ s.id }}" (click)="move('down', s)">
+                    </p>
+                </div>
+
+                <jw-modal id="ov_stations">
+                    <div id="allstationsdiv">
+                        <p *ngFor="let st of allStations" id="{{ st.id }}" [ngClass]="{'selected': st.selected, 'notselected': !st.selected}" (click)="onstationclick(st)">{{ st.name }}</p>
+                    </div>
+                    <span (click)="closemodal()"><img src="../../../../assets/icons/x.png" alt=""></span>
+                </jw-modal>
+
+                <span (click)="openmodal()" class="stationsplus"><img src="../../../assets/icons/plussymbol_leer.png" alt="+"></span>
             </div>
-            <span><img src="../../../assets/icons/plus.png" alt="+"></span>
+
+            <jw-modal id="ov_medias">
+                <div class="mediawrapper">
+                    <div class="mediabox">
+                        <p>Elements</p>
+                        <div id="medias" class="medias">
+                            <p  *ngFor="let m of sortedMedia" (click)="onmediaclick(m.id, m)" id="{{ m.id }}" [ngClass]= "allavailableMedia.active ? 'active' : 'inactive'">
+                                {{ m.caption }} {{ m.text }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </jw-modal>
         </div>
     </div>
 </div>

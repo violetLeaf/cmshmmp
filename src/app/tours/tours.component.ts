@@ -13,9 +13,9 @@ export class ToursComponent implements OnInit {
   toursarray: TourModel[] = [];
   standardTour: TourModel= {
     id: -1,
-    title: null,
+    title: "Standard Tour",
     reversible: false,
-    date: null
+    date: new Date()
   };
 
   constructor(private router: Router, private http: HttpClient, private tourService: TourservicesService) {
@@ -38,10 +38,4 @@ export class ToursComponent implements OnInit {
   public get sortedTours(){
     return this.toursarray.sort((a, b)=> {return a.id - b.id});
   }
-
-  // this.http.post<TourModel>("http://localhost:3000/posttour", this.toursarray[0]).subscribe(
-  //     function(res){
-  //       console.log(res);
-  //     }
-    // )
 }
